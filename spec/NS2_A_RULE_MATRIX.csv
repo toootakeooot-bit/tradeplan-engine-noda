@@ -1,7 +1,7 @@
 Rule,Name,Status,PrimaryStageProposal,SecondaryStageProposal,ObservationDependency,ImageReview,PrimarySource,SourceLocator,SourceConflict,UserJudgment
-R01,高値・安値が土台,REVIEW_REQUIRED,Environment,Observation,"NO101;NO102",RECOMMENDED,"S01;C01","S01 high/low foundation section; C01 pp13-15",NONE,未確認
-R02,トレンドの定義,REVIEW_REQUIRED,Environment,Observation,"NO101;NO102",RECOMMENDED,S01,"S01 動画重要ポイント 1-2",NONE,未確認
-R03,ターンの区切り,"REVIEW_REQUIRED;IMAGE_REVIEW_PENDING",Environment,Observation,"NO101;NO102;NO103=DEPENDENCY_TBD",REQUIRED,"C01;S01","S01 ターンの概念; C01 pp14-15",NONE,未確認
+R01,高値・安値が土台,CONFIRMED,Environment(CONFIRMED),Observation,"NO101;NO102",OPTIONAL,"S01;C01","S01 high/low foundation section; C01 pp13-15",NONE,OK
+R02,トレンドの定義,CONFIRMED,Environment(CONFIRMED),Observation,"NO101;NO102",OPTIONAL,S01,"S01 動画重要ポイント 1-2",NONE,"OK / 修正反映済み"
+R03,ターンの区切り,"CONFIRMED_RULE;DETECTION_TBD",Environment(CONFIRMED),Observation,"NO101;NO102;NO103=RELATIONSHIP_TBD","RULE_CONFIRMED;DETECTOR_REVIEW_LATER","C01;S01;USER_REVIEW_APPROVED_CLARIFICATION","S01 ターンの概念; C01 pp14-15; N-pattern exact wording=user-confirmed clarification",NONE,"OK / 修正反映済み"
 R04,大・中・小ダウを目的で分ける,"REVIEW_REQUIRED;IMAGE_REVIEW_PENDING",Environment,"Phase;Setup","OBSERVATION_CANDIDATE=Turn/DowScale",REQUIRED,"C01;C02","C01 pp13-17; C02 pp14-15",NONE,未確認
 R05,ラインは目的で選ぶ,REVIEW_REQUIRED,Environment,Observation,DEPENDENCY_TBD,OPTIONAL,S03,"S03 line-purpose section before ラインの種類と性質",NONE,未確認
 R06,基本ライン,"REVIEW_REQUIRED;IMAGE_REVIEW_PENDING",Observation,Environment,"NO201;NO202;NO203",REQUIRED,"S03;S06","S03 1)ラインの種類; S06=SOURCE_LOCATOR_TBD",NONE,未確認

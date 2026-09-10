@@ -1,16 +1,16 @@
 # NS2-A User Review R01-R10
 
-Status: **USER REVIEW REQUIRED**
+Status: **R01-R03 CONFIRMED / R04-R10 USER REVIEW REQUIRED**
 
-このファイルはユーザー確認用です。`OK / 修正 / 保留` が入るまで、どのRuleも `CONFIRMED` ではありません。
+このファイルはNS2-Aのユーザー確認記録です。R01-R03はNS2-A1でユーザー確認結果を反映済みです。R04-R10は引き続き `未確認` であり、`CONFIRMED` ではありません。
 
 ## 1. 一覧レビュー
 
-| Rule | 簡単に言うと | 主Source | Stage候補 | Observation依存 | 画像確認 | 不明点 | ユーザー判定 |
+| Rule | 簡単に言うと | 主Source | Stage | Observation依存 | 画像確認 | 不明点 | ユーザー判定 |
 |---|---|---|---|---|---|---|---|
-| R01 | まず高値・安値を読む。そこが全分析の土台。 | S01 / C01 | Environment | NO101/NO102 | RECOMMENDED | 重要高安の選択規則 | 未確認 |
-| R02 | 高値と安値が両方切り上がれば上昇、両方切り下がれば下降。 | S01 | Environment | NO101/NO102 | RECOMMENDED | 混在時の正式扱い | 未確認 |
-| R03 | 高値・安値のリズムが変わる所をターンとして区切る。 | S01 / C01 | Environment | NO101/NO102、NO103はTBD | REQUIRED | Swingとの関係 | 未確認 |
+| R01 | まず高値・安値を読む。そこが全分析の土台。 | S01 / C01 | Environment (CONFIRMED) | NO101/NO102 | OPTIONAL | 重要高安の厳密な検出規則 | OK |
+| R02 | 高値と安値が両方切り上がれば上昇、両方切り下がれば下降。それ以外は上昇でも下降でもない。 | S01 | Environment (CONFIRMED) | NO101/NO102 | OPTIONAL | 重要高安の厳密な選択アルゴリズム | OK / 修正反映済み |
+| R03 | N字が1つ形成された後、上昇側はその区間の最安値、下降側は最高値をターン起点として遡って確定する。 | C01 / S01 + user-confirmed clarification | Environment (CONFIRMED) | NO101/NO102、NO103はRELATIONSHIP_TBD | Rule定義は確認済み / Detector検証は後続 | N_PATTERN_DETECTION_TBD、Swingとの関係 | OK / 修正反映済み |
 | R04 | 大・中・小ダウは見る目的・波の尺度を分ける。 | C01 / C02 | Environment | 新Observation候補あり | REQUIRED | 尺度境界、時間足との関係 | 未確認 |
 | R05 | ラインは未来予測のためでなく、買い手・売り手と戦場を可視化するために選ぶ。 | S03 | Environment | TBD | OPTIONAL | 実装上の選択基準 | 未確認 |
 | R06 | HL/TL/CHには基本の引き方がある。 | S03 / S06 | Observation | NO201/NO202/NO203 | REQUIRED | 複数候補時の選択優先 | 未確認 |
@@ -24,65 +24,82 @@ Status: **USER REVIEW REQUIRED**
 ## R01｜高値・安値が土台
 
 【正式定義】  
-トレンド判断、ライン選択、トレードプランは、安値・高値の読み取りを土台にする。インジケーターを先に見て方向を決めない。
+トレンド判断、ライン選択、トレードプランは、高値・安値の読み取りを土台にする。
 
 【簡単に言うと】  
-まず高値と安値を見る。インジケーターだけで先に方向を決めない。
+まず高値と安値を見る。そこが野田式分析の出発点。
 
 【AIはこう理解している】  
-野田式の環境認識を開始する前提ルール。高値・安値そのものの選び方は別途定義が必要。
+野田式の環境認識を開始する前提ルール。高値・安値そのものの厳密な選び方は別途定義が必要。
 
 【主Source】 S01 `04 トレンドの判断方法.txt`  
 【補助Source】 C01 `短期集中コース 1回目.pdf`  
-【Stage候補】 Primary: Environment / Secondary: Observation  
+【Stage】 Primary: Environment (CONFIRMED)  
 【Observation依存】 NO101, NO102  
-【画像確認】 RECOMMENDED  
-【不明点】 どのRaw High/Lowを「読むべき高値・安値」と採用するか。  
+【画像確認】 Rule Definitionの確定には不要。将来の検出・回帰例では使用可能。  
+【不明点】 どのRaw High/Lowを「読むべき高値・安値」と採用するかの厳密なDetector。  
 【Source Conflict】 なし  
-【ユーザー判定】 未確認
+【ユーザー判定】 OK
+
+【ユーザー承認済み差分】  
+現行基準Rule Ledgerの「インジケーターを先に見て方向を決めない」は今回の正式定義から除外する。補助ルール、注記、OPEN ISSUE等としても残さない。変更理由=`USER_REVIEW_APPROVED_CLARIFICATION`。
 
 ---
 
 ## R02｜トレンドの定義
 
 【正式定義】  
-上昇トレンドは安値と高値が切り上がって推移、下降トレンドは安値と高値が切り下がって推移する。現行台帳では、両方が揃わない場合を方向未確定・レンジ・ターン変化候補としている。
+- 上昇トレンド：高値と安値がともに切り上がって推移する。  
+- 下降トレンド：高値と安値がともに切り下がって推移する。  
+- それ以外：上昇トレンドでも下降トレンドでもない。
+
+`NOT_UP_OR_DOWN` は新しいトレンド種類ではなく、上昇・下降のどちらの条件にも該当しない否定状態としてのみ扱う。
 
 【簡単に言うと】  
-高値・安値の両方が上なら上昇、両方が下なら下降として読む。
+高値・安値が両方上なら上昇、両方下なら下降。それ以外を勝手にレンジや横ばいへ分類しない。
 
 【AIはこう理解している】  
-トレンド方向を価格構造から判定するEnvironmentルール。
+トレンド定義は上昇・下降の2種類。判定出力は必要に応じ `UPTREND / DOWNTREND / NOT_UP_OR_DOWN` の3状態を表現できる。
 
 【主Source】 S01 `04 トレンドの判断方法.txt`  
 【補助Source】 なし  
-【Stage候補】 Primary: Environment / Secondary: Observation  
+【Stage】 Primary: Environment (CONFIRMED)  
 【Observation依存】 NO101, NO102  
-【画像確認】 RECOMMENDED  
-【不明点】 高値と安値の方向が一致しない場合の3分類をどこまで正式ルールとして扱うか再確認。  
+【画像確認】 Rule Definitionの確定には不要。将来の回帰テスト例として使用可能。  
+【不明点】 NO101/NO102の厳密な選択アルゴリズム。  
 【Source Conflict】 なし  
-【ユーザー判定】 未確認
+【ユーザー判定】 OK / 修正反映済み
+
+【ユーザー承認済み差分】  
+現行基準Rule Ledgerの「方向未確定、レンジ、またはターン変化候補」という自動分類は採用しない。変更理由=`USER_REVIEW_APPROVED_CLARIFICATION`。
 
 ---
 
 ## R03｜ターンの区切り
 
 【正式定義】  
-S01ではターンを高値・安値のリズムが変化したところとしている。C01では、小ダウのターンを一つの上げ・下げ内の変化起点、大ダウのターンを複数の小ダウターンを跨ぎ最低でも上げ・下げ1サイクルを含む変化起点としている。
+- 上昇側：N字が1つ形成された後に、そのN字を形成する区間の最安値が確定し、その最安値をターンの起点として遡って確定する。  
+- 下降側：N字が1つ形成された後に、そのN字を形成する区間の最高値が確定し、その最高値をターンの起点として遡って確定する。
+
+ターン起点は高値・安値候補が出現した瞬間に即時確定するのではなく、N字形成後に `candidate` から `confirmed turn origin` へ遡及確定する。
 
 【簡単に言うと】  
-高値・安値の進み方が変わった所で波を区切る。大ダウと小ダウでは見る波の大きさが違う。
+N字が1つできてから、そのN字の始まりとなる極値を後からターン起点として確定する。上昇側は最安値、下降側は最高値。
 
 【AIはこう理解している】  
-後続の大中小ダウ、ライン、局面を作るための重要な構造区切り。
+後続の大中小ダウ、ライン、局面が利用するEnvironmentの構造認識ルール。Ruleの意味は確認済みだが、OHLCからN字完成を機械判定するDetectorはまだ定義しない。
 
-【主Source】 C01 / S01  
-【Stage候補】 Primary: Environment / Secondary: Observation  
-【Observation依存】 NO101, NO102。NO103 Swingとの関係はTBD。  
-【画像確認】 REQUIRED  
-【不明点】 TurnとSwingを同一概念としてよいか。具体的にどこを変化起点とするか。  
+【主Source】 C01 / S01（ターン概念・大小ターンの文脈）  
+【ユーザー確認】 N字形成後の遡及起点確定を `USER_REVIEW_APPROVED_CLARIFICATION` として反映。既存SourceがこのN字文言を直接記載しているとは扱わない。  
+【Stage】 Primary: Environment (CONFIRMED)  
+【Observation依存】 NO101, NO102。NO103 Swingとの関係は `RELATIONSHIP_TBD`。  
+【画像確認】 Rule DefinitionはCONFIRMED。Visual Detector verificationは後続工程。  
+【不明点】 `N_PATTERN_DETECTION_TBD`。SwingとTurnの関係。  
 【Source Conflict】 なし  
-【ユーザー判定】 未確認
+【ユーザー判定】 OK / 修正反映済み
+
+【不採用】  
+左ターンの最後の戻り高値/押し安値抜け条件、および38%戻し条件は今回の体系へ一切登録しない。
 
 ---
 
@@ -236,4 +253,4 @@ Environmentの面の認識と、その後のSetup/Triggerとなる変化を混�
 
 ## 2. レビュー推奨順
 
-まず `R01-R03`、次に `R04-R06`、最後に `R07-R10` の順で確認する。特に R03/R04/R06/R07/R08/R09 は画像確認を行うまで最終確定しない。
+R01-R03はNS2-A1で確認済み。次はユーザー指示後に `R04-R06`、その後 `R07-R10` の順で確認する。R04/R06/R07/R08/R09は画像確認を行うまで最終確定しない。

@@ -1,0 +1,13 @@
+ID,Name,Layer,Status,Source,Definition,Input,Output,Dependencies,Timeframe,Determinism,OpenIssue,Notes
+MF001,OHLC,L0,FIXED,NS0 responsibility baseline,"Supplied candle Open High Low Close values; no NODA significance implied",Prepared market input,Raw OHLC values,None,As supplied,Deterministic as supplied,,Concept fixed; transport/schema details deferred
+MF002,Timestamp,L0,FIXED,NS0 responsibility baseline,"Supplied timestamp associated with market record/candle",Prepared market input,Timestamp,None,As supplied,Deterministic as supplied,,Timezone normalization deferred to common input contract
+MF003,Symbol,L0,FIXED,NS0 responsibility baseline,"Supplied instrument identifier",Prepared market input,Symbol,None,As supplied,Deterministic as supplied,,Broker alias normalization deferred
+MF004,Timeframe,L0,FIXED,NS0 responsibility baseline,"Supplied timeframe identifier",Prepared market input,Timeframe,None,As supplied,Deterministic as supplied,,Canonical encoding deferred
+MF005,Current Price,L0,PROVISIONAL,NS0 candidate fact,"Supplied current-price field; quote-side semantic not fixed",Prepared market input,Current price,None,As supplied,Conditional on input contract,NS1-OI-007,Bid Ask Last Mid semantics not assumed
+MF006,Raw Candle Series,L0,PROVISIONAL,NS0 candidate fact,"Supplied ordered candle records; ordering/open-candle policy not fixed",Prepared market input,Candle series,MF001 MF002 MF003 MF004,As supplied,Conditional on input contract,NS1-OI-008,No resampling or repair semantics invented
+NO101,NODA-significant High,L1,TBD,Authoritative NODA source required,"Exact NODA selection rule not fixed; distinct from raw candle High",Candidate L0 candle data,TBD,TBD,TBD,Not asserted,NS1-OI-001,Layer registration only
+NO102,NODA-significant Low,L1,TBD,Authoritative NODA source required,"Exact NODA selection rule not fixed; distinct from raw candle Low",Candidate L0 candle data,TBD,TBD,TBD,Not asserted,NS1-OI-002,Layer registration only
+NO103,Swing,L1,TBD,Authoritative NODA source required,"Exact NODA meaning and recognition rule not fixed",Candidate L0 and/or governed observations,TBD,TBD,TBD,Not asserted,NS1-OI-003,Generic swing definition prohibited
+NO201,HL,L2,TBD,Authoritative NODA source required,"Exact NODA definition and recognition rule not fixed",TBD,TBD,TBD,TBD,Not asserted,NS1-OI-004,No generic TA substitution
+NO202,TL,L2,TBD,Authoritative NODA source required,"Exact NODA definition and recognition rule not fixed",TBD,TBD,TBD,TBD,Not asserted,NS1-OI-005,No generic TA substitution
+NO203,CH,L2,TBD,Authoritative NODA source required,"Exact NODA definition and recognition rule not fixed",TBD,TBD,TBD,TBD,Not asserted,NS1-OI-006,No generic TA substitution

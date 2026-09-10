@@ -1,6 +1,6 @@
 # NS2-A R01-R10 Draft
 
-Status: **R01-R03 CONFIRMED / R04-R10 REVIEW_REQUIRED**
+Status: **R01-R05 CONFIRMED / R06 CONFIRMED_BASIC + VISUAL_SELECTION_TBD / R07-R10 REVIEW_REQUIRED**
 
 Repository: `toootakeooot-bit/tradeplan-engine-noda`
 
@@ -8,7 +8,7 @@ Branch: `feature/noda-v1`
 
 NS2-A DRAFT baseline HEAD: `4ecf8f584e26a08f226ccaf9f99b8fed085b2529`
 
-This document now records NS2-A1 user-confirmed results for R01-R03 while preserving R04-R10 as the original NS2-A draft. The external baseline Rule Ledger `02_野田式判断ルール台帳.md` is not directly edited here.
+This document records NS2-A1 user-confirmed results for R01-R03 and NS2-A2 user-confirmed results for R04-R06. R07-R10 remain at the original NS2-A review state. The external baseline Rule Ledger `02_野田式判断ルール台帳.md` is not directly edited here.
 
 ## 1. Summary matrix
 
@@ -17,15 +17,15 @@ This document now records NS2-A1 user-confirmed results for R01-R03 while preser
 | R01 | Environment | Environment (CONFIRMED) | Observation relationship retained | NO101, NO102; detector detail TBD | OPTIONAL for rule definition | CONFIRMED |
 | R02 | Environment | Environment (CONFIRMED) | Observation relationship retained | NO101, NO102; detector detail TBD | OPTIONAL for rule definition | CONFIRMED |
 | R03 | Environment | Environment (CONFIRMED) | Observation relationship retained | NO101, NO102; NO103=RELATIONSHIP_TBD | Detector verification later | CONFIRMED_RULE / DETECTION_TBD |
-| R04 | Environment | Environment | Phase / Setup | OBSERVATION_CANDIDATE: Turn/Dow scale; existing dependency TBD | REQUIRED | REVIEW_REQUIRED / IMAGE_REVIEW_PENDING |
-| R05 | Line/Zone/Field | Environment | Observation | line observations involved; exact dependency TBD | OPTIONAL | REVIEW_REQUIRED |
-| R06 | Line/Zone/Field | Observation | Environment | NO201, NO202, NO203 | REQUIRED | REVIEW_REQUIRED / IMAGE_REVIEW_PENDING |
+| R04 | Environment | Environment (CONFIRMED) | Phase / Setup relationship retained | Turn/Dow scale representation governed later | Detector verification later | CONFIRMED_RULE / DOW_SCALE_DETECTION_TBD |
+| R05 | Line/Zone/Field | Environment (CONFIRMED) | Observation relationship retained | exact dependency TBD | OPTIONAL | CONFIRMED |
+| R06 | Line/Zone/Field | Observation (CONFIRMED BASIC) | Environment | NO201, NO202, NO203 | Basic reviewed; candidate selection unresolved | CONFIRMED_BASIC / VISUAL_SELECTION_TBD |
 | R07 | Line/Zone/Field | Environment | Observation / Phase | NO201, NO202; Dow-scale dependency TBD | REQUIRED | REVIEW_REQUIRED / IMAGE_REVIEW_PENDING |
 | R08 | Line/Zone/Field | Setup | Environment / Observation | NO201, NO202, NO203; small-Dow dependency TBD | REQUIRED | REVIEW_REQUIRED / IMAGE_REVIEW_PENDING |
 | R09 | Line/Zone/Field | Observation | Environment | NO202; OBSERVATION_CANDIDATE: TL Zone | REQUIRED | REVIEW_REQUIRED / IMAGE_REVIEW_PENDING |
 | R10 | Line/Zone/Field | Environment | Setup / Trigger | field/action concepts; exact observation dependency TBD | RECOMMENDED | REVIEW_REQUIRED |
 
-R01-R03 Primary Stage assignments are confirmed by user review. R04-R10 assignments remain `PROPOSED`, not final.
+R01-R06 Primary Stage assignments are confirmed at the rule-semantics level. R06's multiple-candidate line selection remains unresolved. R07-R10 assignments remain `PROPOSED`, not final.
 
 ## 2. Source locator results
 
@@ -34,9 +34,9 @@ R01-R03 Primary Stage assignments are confirmed by user review. R04-R10 assignme
 | R01 | S01, C01 | S01 `04 トレンドの判断方法.txt`: high/low foundation section. C01 `短期集中コース 1回目.pdf`: pp.13-15 area. | User-approved clarification removes the indicator sentence from the confirmed definition. |
 | R02 | S01 | S01: `★★動画の重要ポイント★★` -> `1）トレンドの定義` and `2）トレンドの判断方法`. | User-approved clarification: only rising/falling trend definitions; non-match is not auto-classified as range/sideways/turn change. |
 | R03 | C01, S01 | S01: `3）ターンの概念`. C01: pp.14-15 `2. ターンの区切り`, small-Dow and large-Dow turn context. | User-confirmed clarification adds retrospective N-pattern origin semantics. Existing sources are not claimed to contain that exact N-pattern wording. |
-| R04 | C01, C02 | C01: pp.13-17, large/small Dow high/low, turn, large/small Dow line purposes. C02: pp.14-15, Field/Action and middle-Dow role. | None found; exact three-scale classification should remain review-gated |
-| R05 | S03 | S03 `06 ラインの種類、引き方.txt`: preface immediately before `ラインの種類と性質`, line purpose is visualizing buyer/seller awareness and the active field; select rather than merely draw. | None found |
-| R06 | S03, S06 | S03: `１）ラインの種類` explicitly defines HL/TL/CH drawing basis. S06 `10 ラインの引き方例.txt` file existence verified, exact supporting section remains `SOURCE_LOCATOR_TBD`. | None found in verified material |
+| R04 | C01, C02 | C01: pp.13-17, large/small Dow high/low, turn, large/small Dow line purposes. C02: pp.14-15, Field/Action and middle-Dow role. | User-approved clarification fixes structural scale + analysis purpose, removes Entry candidate from R04 definition, and explicitly avoids fixed timeframe mapping. |
+| R05 | S03 | S03 `06 ラインの種類、引き方.txt`: preface immediately before `ラインの種類と性質`, line purpose is visualizing buyer/seller awareness and the active field. | User confirmed core purpose wording. |
+| R06 | S03, S06 | S03: `１）ラインの種類`. S06 `10 ラインの引き方例.txt`: `前回までのおさらい -> 1）ラインの種類`, directly restating HL/TL/CH basics. A2 teacher-corrected images were also reviewed for visual selection context. | Basic geometry confirmed. The inspected images do not establish a unique multiple-candidate selection rule; keep `VISUAL_SELECTION_TBD`. |
 | R07 | C01 | C01 p.16 `3. 大ダウのライン`: TL not broken at selection; HL at turn extreme; purpose is broad field / edge. | None found |
 | R08 | C01 | C01 p.17 `4. 小ダウのライン`: within one trend phase; often for small-Dow BR; nearby symmetry/cluster focus. | None found |
 | R09 | S04 | S04 `07 トレンドラインゾーンの取り方.txt`: `ゾーンの取り方`, basic = wick to body of starting candle; application variants also stated. | None found |
@@ -119,33 +119,38 @@ The left-turn last-return-high / last-push-low break condition and the 38% retra
 - 小ダウ：一つの局面内のアクション、BR、Entry候補を捉える  
 小さな波を詳細に見たことを、大ダウ分析の代用にしない。 `[C01, C02]`
 
-**Formal interpretation for review**  
-C01 directly distinguishes large/small Dow roles; C02 directly describes middle Dow as an intermediate field/trend viewpoint inside the large-Dow move. The exact boundary between the three scales remains visual/source-review dependent.
+**Confirmed definition**  
+大・中・小ダウは、値動きの構造尺度と分析目的によって使い分ける。
 
-**Plain Japanese**  
-大・中・小は単なる拡大率ではなく、見る目的を変える。大は全体の戦場、小は実際のBRやアクション、中はその途中を見る。
+- 大ダウ：広範囲のフィールドと際を捉える。  
+- 中ダウ：大ダウ内の途中の構造・フィールドを捉える。  
+- 小ダウ：局面内の細かな構造とアクションを捉える。  
+- 大・中・小ダウを特定の時間足へ固定しない。
 
-**Stage**: Primary=`Environment (PROPOSED)`; Secondary=`Phase / Setup (PROPOSED)`  
-**Dependencies**: existing observation dependencies are TBD.  
-**Observation candidate**: governed `Dow scale / turn scale` structure may be needed later.  
-**Image**: REQUIRED / IMAGE_REVIEW_PENDING.  
-**Open point**: exact scale boundary and relation to timeframe are not fixed.
+**User judgment**: `OK / 修正反映済み`  
+**Change reason**: `USER_REVIEW_APPROVED_CLARIFICATION`  
+**Stage**: Primary=`Environment (CONFIRMED)`  
+**Dependencies**: governed Turn/Dow-scale representation may be required later; no Observation ID added here.  
+**Detection implementation**: `DOW_SCALE_DETECTION_TBD`.  
+**Image**: rule semantics confirmed; machine scale-selection verification deferred.
+
+**User-approved difference**  
+R04 no longer defines small Dow through `Entry候補`. Entry remains a downstream responsibility. BR is also not made a defining condition of small Dow. The large/middle/small distinction is structural scale + analysis purpose, not a fixed timeframe map.
 
 ### R05 | ラインは「引けた」ではなく「目的で選ぶ」
 
 **Baseline text**  
 ラインの第一目的は、買い手と売り手の意識、現在の戦場のフィールドを視覚化すること。価格を当てるために無目的に増やさない。 `[S03]`
 
-**Formal interpretation for review**  
-S03 directly states that the first purpose of lines is to visualize buyer/seller awareness and the field where the contest is occurring; lines are selected intentionally rather than drawn merely because they can be drawn.
+**Confirmed definition**  
+ラインは、買い手・売り手の意識と現在のフィールドを視覚化する目的で選ぶ。
 
-**Plain Japanese**  
-ラインは未来の価格を当てるために増やすものではなく、今どこで買い手と売り手が戦っているかを見るために選ぶ。
-
-**Stage**: Primary=`Environment (PROPOSED)`; Secondary=`Observation (PROPOSED)`  
-**Dependencies**: exact line-observation dependency TBD.  
-**Image**: OPTIONAL.  
-**Open point**: none material at principle level; later line selection implementation still requires sourced criteria.
+**User judgment**: `OK`  
+**Change reason**: `USER_REVIEW_APPROVED_CLARIFICATION`  
+**Stage**: Primary=`Environment (CONFIRMED)`  
+**Dependencies**: exact governed line-observation dependency remains later work.  
+**Image**: not required for rule-definition confirmation.  
+**Open point**: implementation criteria for choosing among multiple line candidates are not defined by R05 itself.
 
 ### R06 | 基本ライン
 
@@ -156,17 +161,22 @@ S03 directly states that the first purpose of lines is to visualize buyer/seller
 - CH：TLと平行にし、上昇CHは直近高値、下降CHは直近安値へ合わせる  
 `[S03, S06]`
 
-**Formal interpretation for review**  
-S03 explicitly states the basic drawing basis for horizontal, trend, and channel lines. S06 is registered as supplemental source but its exact NS2-A locator remains TBD.
+**Confirmed basic definition**  
+- HL：価格が反転している高値・安値に水平に引く。  
+- 上昇TL：切り上げた2点の安値で引く。  
+- 下降TL：切り下げた2点の高値で引く。  
+- CH：TLと平行にし、上昇CHは直近高値、下降CHは直近安値へ合わせる。
 
-**Plain Japanese**  
-HLは高値・安値へ水平、上昇TLは切り上げた安値2点、下降TLは切り下げた高値2点、CHはそのTLと平行に反対側へ合わせる。
-
-**Stage**: Primary=`Observation (PROPOSED)`; Secondary=`Environment (PROPOSED)`  
+**User judgment**: `基本OK / 画像確認済み・選択規則TBD`  
+**Stage**: Primary=`Observation (CONFIRMED BASIC)`; Secondary=`Environment`.  
 **Dependencies**: NO201 HL, NO202 TL, NO203 CH.  
-**NS1 OI**: NS1-OI-004/005/006 = 解決候補あり。ただし「どの点を採用するか」の完全な選択規則は画像・追加Source確認が必要。  
-**Image**: REQUIRED / IMAGE_REVIEW_PENDING.  
-**Open point**: exact selection priority when multiple valid-looking points exist.
+**NS1 OI**: NS1-OI-004/005/006 receive stronger source evidence for basic geometry, but the complete candidate-selection rule remains unresolved. No Observation status is promoted here.  
+**Source locator update**: S06 exact supporting section is now captured as `前回までのおさらい -> 1）ラインの種類`, which restates HL/TL/CH basics.  
+**Visual review**: teacher-corrected daily, H4, H1, wave-AB, and final images were reviewed as A2 visual evidence. The drawings support the existence of different structural scales, but do not by themselves establish a unique rule for selecting among multiple valid-looking line candidates.  
+**Open point**: `VISUAL_SELECTION_TBD` — exact priority for selecting TL start/end points, HL reaction points, and CH counterpart points when multiple candidates exist.
+
+**Responsibility routing**  
+User-provided context about the outermost large-Dow TL, turn-spanning middle-Dow lines, and area/field partitioning is not inserted into R06. The large-Dow TL role is deferred to the R07 user review; area partitioning and Field/Action semantics are deferred to R10. R07-R10 are not modified or confirmed by NS2-A2.
 
 ### R07 | 大ダウのライン
 
@@ -242,25 +252,25 @@ C02 p.14 directly separates Field, used to grasp the battlefield edge-to-edge, f
 
 ## 4. NS1 open-issue linkage
 
-| NS1 issue | NS2-A1 state | Status |
+| NS1 issue | NS2-A2 state | Status |
 |---|---|---|
-| NS1-OI-001 Significant High | R01-R03 confirm that highs are structurally required, but no universal detector is fixed | PARTIAL |
-| NS1-OI-002 Significant Low | R01-R03 confirm that lows are structurally required, but no universal detector is fixed | PARTIAL |
-| NS1-OI-003 Swing | R03 Turn semantics are confirmed; Swing=Turn is not established | UNRESOLVED / RELATIONSHIP_TBD |
-| NS1-OI-004 HL | Unchanged from NS2-A draft | PARTIAL / candidate evidence |
-| NS1-OI-005 TL | Unchanged from NS2-A draft | PARTIAL / candidate evidence |
-| NS1-OI-006 CH | Unchanged from NS2-A draft | PARTIAL / candidate evidence |
+| NS1-OI-001 Significant High | R01-R03 confirm structural need; no universal detector fixed | PARTIAL |
+| NS1-OI-002 Significant Low | R01-R03 confirm structural need; no universal detector fixed | PARTIAL |
+| NS1-OI-003 Swing | R03 Turn semantics confirmed; Swing=Turn not established | UNRESOLVED / RELATIONSHIP_TBD |
+| NS1-OI-004 HL | R06 basic HL geometry source-confirmed/user-approved; candidate point selection remains unresolved | PARTIAL / stronger evidence |
+| NS1-OI-005 TL | R06 basic TL geometry source-confirmed/user-approved; multiple-candidate selection remains unresolved | PARTIAL / stronger evidence |
+| NS1-OI-006 CH | R06 basic CH relation source-confirmed/user-approved; counterpart selection in ambiguous cases remains unresolved | PARTIAL / stronger evidence |
 
-No NS1 Observation is promoted to FIXED in NS2-A1.
+No NS1 Observation is promoted to FIXED in NS2-A2.
 
-## 5. Observation candidates
+## 5. Observation / detector candidates
 
-No new Observation ID is added in NS2-A1. Turn/N-pattern may require governed representation later, but is not registered now. NO103 Swing is not merged with Turn.
+No new Observation ID is added in NS2-A2. `DOW_SCALE_DETECTION_TBD` and `VISUAL_SELECTION_TBD` are implementation/open-review states, not new trading rules.
 
 ## 6. User-approved differences
 
-R01-R03 differences from the external baseline Rule Ledger are recorded in `review/NS2_A_R01_R03_CONFIRMATION.md`. The external ledger itself is not directly overwritten.
+R01-R03 differences are recorded in `review/NS2_A_R01_R03_CONFIRMATION.md`. R04-R06 differences and review dispositions are recorded in `review/NS2_A_R04_R06_CONFIRMATION.md`. The external Rule Ledger is not directly overwritten.
 
 ## 7. Stop condition
 
-R01-R03 are confirmed at the Rule-semantics level as specified above. R03 detector implementation remains `N_PATTERN_DETECTION_TBD`. R04-R10 remain exactly at NS2-A review status and are not confirmed. NS2-B must not begin until further user instruction.
+R01-R05 are confirmed at the Rule-semantics level. R06 basic definition is confirmed while multiple-candidate visual selection remains `VISUAL_SELECTION_TBD`. R07-R10 remain unconfirmed and unchanged in review status. NS2-B must not begin until further user instruction.

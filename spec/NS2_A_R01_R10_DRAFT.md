@@ -1,22 +1,22 @@
 # NS2-A R01-R10 Draft
 
-Status: **NS2-A DRAFT / REVIEW_REQUIRED**
+Status: **R01-R03 CONFIRMED / R04-R10 REVIEW_REQUIRED**
 
 Repository: `toootakeooot-bit/tradeplan-engine-noda`
 
 Branch: `feature/noda-v1`
 
-Baseline HEAD: `4cc73454cf81b2c121ce5d979618ffb75f3ccbb5`
+NS2-A DRAFT baseline HEAD: `4ecf8f584e26a08f226ccaf9f99b8fed085b2529`
 
-This document classifies R01-R10 for user review only. It does not change the baseline Rule Ledger and does not make any Rule `CONFIRMED`.
+This document now records NS2-A1 user-confirmed results for R01-R03 while preserving R04-R10 as the original NS2-A draft. The external baseline Rule Ledger `02_野田式判断ルール台帳.md` is not directly edited here.
 
 ## 1. Summary matrix
 
-| Rule | Current category | Primary Stage (PROPOSED) | Secondary Stage (PROPOSED) | Observation dependency | Image review | Status |
+| Rule | Current category | Primary Stage | Secondary Stage | Observation dependency | Image review | Status |
 |---|---|---|---|---|---|---|
-| R01 | Environment | Environment | Observation | NO101, NO102 | RECOMMENDED | REVIEW_REQUIRED |
-| R02 | Environment | Environment | Observation | NO101, NO102 | RECOMMENDED | REVIEW_REQUIRED |
-| R03 | Environment | Environment | Observation | NO101, NO102; NO103=DEPENDENCY_TBD | REQUIRED | REVIEW_REQUIRED / IMAGE_REVIEW_PENDING |
+| R01 | Environment | Environment (CONFIRMED) | Observation relationship retained | NO101, NO102; detector detail TBD | OPTIONAL for rule definition | CONFIRMED |
+| R02 | Environment | Environment (CONFIRMED) | Observation relationship retained | NO101, NO102; detector detail TBD | OPTIONAL for rule definition | CONFIRMED |
+| R03 | Environment | Environment (CONFIRMED) | Observation relationship retained | NO101, NO102; NO103=RELATIONSHIP_TBD | Detector verification later | CONFIRMED_RULE / DETECTION_TBD |
 | R04 | Environment | Environment | Phase / Setup | OBSERVATION_CANDIDATE: Turn/Dow scale; existing dependency TBD | REQUIRED | REVIEW_REQUIRED / IMAGE_REVIEW_PENDING |
 | R05 | Line/Zone/Field | Environment | Observation | line observations involved; exact dependency TBD | OPTIONAL | REVIEW_REQUIRED |
 | R06 | Line/Zone/Field | Observation | Environment | NO201, NO202, NO203 | REQUIRED | REVIEW_REQUIRED / IMAGE_REVIEW_PENDING |
@@ -25,15 +25,15 @@ This document classifies R01-R10 for user review only. It does not change the ba
 | R09 | Line/Zone/Field | Observation | Environment | NO202; OBSERVATION_CANDIDATE: TL Zone | REQUIRED | REVIEW_REQUIRED / IMAGE_REVIEW_PENDING |
 | R10 | Line/Zone/Field | Environment | Setup / Trigger | field/action concepts; exact observation dependency TBD | RECOMMENDED | REVIEW_REQUIRED |
 
-All stage assignments above are `PROPOSED`, not final.
+R01-R03 Primary Stage assignments are confirmed by user review. R04-R10 assignments remain `PROPOSED`, not final.
 
 ## 2. Source locator results
 
-| Rule | Ledger source label | Verified source/location in NS2-A | Source conflict |
+| Rule | Ledger source label | Verified source/location in NS2-A | Source/review result |
 |---|---|---|---|
-| R01 | S01, C01 | S01 `04 トレンドの判断方法.txt`: section explaining that reading highs/lows is the foundation for trend, line selection and trade planning. C01 `短期集中コース 1回目.pdf`: pp.13-15 area, high/low progression and turn definitions. | None found |
-| R02 | S01 | S01: `★★動画の重要ポイント★★` -> `1）トレンドの定義` and `2）トレンドの判断方法`. | None found |
-| R03 | C01, S01 | S01: `3）ターンの概念` = rhythm change in highs/lows. C01: pp.14-15 `2. ターンの区切り`, small-Dow and large-Dow turn distinction. | None found; wording granularity differs but is not contradictory |
+| R01 | S01, C01 | S01 `04 トレンドの判断方法.txt`: high/low foundation section. C01 `短期集中コース 1回目.pdf`: pp.13-15 area. | User-approved clarification removes the indicator sentence from the confirmed definition. |
+| R02 | S01 | S01: `★★動画の重要ポイント★★` -> `1）トレンドの定義` and `2）トレンドの判断方法`. | User-approved clarification: only rising/falling trend definitions; non-match is not auto-classified as range/sideways/turn change. |
+| R03 | C01, S01 | S01: `3）ターンの概念`. C01: pp.14-15 `2. ターンの区切り`, small-Dow and large-Dow turn context. | User-confirmed clarification adds retrospective N-pattern origin semantics. Existing sources are not claimed to contain that exact N-pattern wording. |
 | R04 | C01, C02 | C01: pp.13-17, large/small Dow high/low, turn, large/small Dow line purposes. C02: pp.14-15, Field/Action and middle-Dow role. | None found; exact three-scale classification should remain review-gated |
 | R05 | S03 | S03 `06 ラインの種類、引き方.txt`: preface immediately before `ラインの種類と性質`, line purpose is visualizing buyer/seller awareness and the active field; select rather than merely draw. | None found |
 | R06 | S03, S06 | S03: `１）ラインの種類` explicitly defines HL/TL/CH drawing basis. S06 `10 ラインの引き方例.txt` file existence verified, exact supporting section remains `SOURCE_LOCATOR_TBD`. | None found in verified material |
@@ -42,24 +42,25 @@ All stage assignments above are `PROPOSED`, not final.
 | R09 | S04 | S04 `07 トレンドラインゾーンの取り方.txt`: `ゾーンの取り方`, basic = wick to body of starting candle; application variants also stated. | None found |
 | R10 | C02 | C02 p.14 `1. ラインの活用法の違い`: Field = battlefield edge-to-edge; Action = change in buyer/seller balance / field insertion-removal. | None found |
 
-## 3. Rule-by-rule draft
+## 3. Rule-by-rule state
 
 ### R01 | 高値・安値が土台
 
 **Baseline text**  
 トレンド判断、ライン選択、トレードプランは、安値・高値の読み取りを土台にする。インジケーターを先に見て方向を決めない。 `[S01, C01]`
 
-**Formal interpretation for review**  
-The first structural input for NODA analysis is the progression of highs and lows; trend judgment, line selection, and later trade planning are based on that reading.
+**Confirmed definition**  
+トレンド判断、ライン選択、トレードプランは、高値・安値の読み取りを土台にする。
 
-**Plain Japanese**  
-まず高値と安値を見る。そこを読まずに、インジケーターだけで先に方向を決めない。
-
-**Stage**: Primary=`Environment (PROPOSED)`; Secondary=`Observation (PROPOSED)`  
+**User judgment**: `OK`  
+**Change reason**: `USER_REVIEW_APPROVED_CLARIFICATION`  
+**Stage**: Primary=`Environment (CONFIRMED)`  
 **Dependencies**: NO101, NO102. Exact significant-high/low recognition remains TBD.  
-**NS1 OI**: NS1-OI-001/002 = 解決候補あり（定義の重要性と用途は確認できるが、検出規則までは未確定）。  
-**Image**: RECOMMENDED.  
-**Open point**: which raw highs/lows qualify as NODA-significant highs/lows is still unresolved.
+**NS1 OI**: NS1-OI-001/002 remain partial; importance and usage are supported, detector rules are not fixed.  
+**Image**: not required for Rule Definition confirmation.
+
+**User-approved difference**  
+The indicator sentence is excluded from the confirmed R01 definition and is not retained as an auxiliary rule, note, OPEN ISSUE, Advanced condition, or separate rule candidate.
 
 ### R02 | トレンドの定義
 
@@ -69,17 +70,22 @@ The first structural input for NODA analysis is the progression of highs and low
 - どちらも揃わない場合：方向未確定、レンジ、またはターン変化候補  
 `[S01]`
 
-**Formal interpretation for review**  
-S01 directly defines rising and falling trends by the joint progression of lows and highs. The baseline's unresolved-case wording remains subject to user/source review.
+**Confirmed definition**  
+- 上昇トレンド：高値と安値がともに切り上がって推移する。  
+- 下降トレンド：高値と安値がともに切り下がって推移する。  
+- それ以外：上昇トレンドでも下降トレンドでもない。
 
-**Plain Japanese**  
-高値と安値が両方上がっていけば上昇、両方下がっていけば下降として読む。
+The trend definitions are two kinds only. Runtime output may use `UPTREND`, `DOWNTREND`, or `NOT_UP_OR_DOWN`; the third is a negative state, not a third trend type.
 
-**Stage**: Primary=`Environment (PROPOSED)`; Secondary=`Observation (PROPOSED)`  
-**Dependencies**: NO101, NO102.  
-**NS1 OI**: NS1-OI-001/002 = 一部解決候補。  
-**Image**: RECOMMENDED.  
-**Open point**: the exact formal handling of mixed high/low progression should be reviewed against source; do not infer extra states.
+**User judgment**: `OK / 修正反映済み`  
+**Change reason**: `USER_REVIEW_APPROVED_CLARIFICATION`  
+**Stage**: Primary=`Environment (CONFIRMED)`  
+**Dependencies**: NO101, NO102; exact selection algorithm remains TBD.  
+**NS1 OI**: NS1-OI-001/002 remain partial.  
+**Image**: not required for Rule Definition confirmation.
+
+**User-approved difference**  
+Do not automatically classify a non-match as range, sideways, turn change, a separate uncertain-market structure, or any generic-TA category.
 
 ### R03 | ターンの区切り
 
@@ -88,17 +94,22 @@ S01 directly defines rising and falling trends by the joint progression of lows 
 - 大ダウのターン：小ダウのターンを複数跨ぎ、最低でも上げ・下げの1サイクルを含む変化の起点  
 `[C01, S01]`
 
-**Formal interpretation for review**  
-S01 states that a turn is where the rhythm of highs/lows changes. C01 distinguishes small-Dow and large-Dow turn boundaries and states the large-Dow view spans multiple small-Dow turns and at least one up/down cycle.
+**Confirmed definition**  
+- 上昇側：N字が1つ形成された後に、そのN字を形成する区間の最安値が確定し、その最安値をターンの起点として遡って確定する。  
+- 下降側：N字が1つ形成された後に、そのN字を形成する区間の最高値が確定し、その最高値をターンの起点として遡って確定する。
 
-**Plain Japanese**  
-高値・安値の進み方のリズムが変わった所をターンとして区切る。小ダウと大ダウでは見る波の大きさが違う。
+The candidate extreme is not an immediately confirmed turn origin. After one N-pattern has formed, the origin is confirmed retrospectively as `confirmed turn origin`.
 
-**Stage**: Primary=`Environment (PROPOSED)`; Secondary=`Observation (PROPOSED)`  
-**Dependencies**: NO101, NO102; NO103 Swing = DEPENDENCY_TBD.  
-**Observation candidate**: `Turn boundary` may require a governed Observation record, but is not added in NS2-A.  
-**NS1 OI**: NS1-OI-003 = 解決候補ありだが、SwingとTurnを同一概念とみなしてよい根拠は未確認。  
-**Image**: REQUIRED / IMAGE_REVIEW_PENDING.
+**User judgment**: `OK / 修正反映済み`  
+**Change reason**: `USER_REVIEW_APPROVED_CLARIFICATION`  
+**Stage**: Primary=`Environment (CONFIRMED)`  
+**Dependencies**: NO101, NO102. NO103 Swing relationship=`RELATIONSHIP_TBD`.  
+**Rule semantics**: USER CONFIRMED.  
+**Detection implementation**: `N_PATTERN_DETECTION_TBD`.  
+**Image**: Rule Definition confirmed; visual detector verification deferred.
+
+**Explicitly not adopted**  
+The left-turn last-return-high / last-push-low break condition and the 38% retracement condition are not registered anywhere in the NS2 rule system, notes, candidates, OPEN ISSUE, or tests.
 
 ### R04 | 大・中・小ダウを目的で分ける
 
@@ -231,31 +242,25 @@ C02 p.14 directly separates Field, used to grasp the battlefield edge-to-edge, f
 
 ## 4. NS1 open-issue linkage
 
-| NS1 issue | NS2-A finding | Status |
+| NS1 issue | NS2-A1 state | Status |
 |---|---|---|
-| NS1-OI-001 Significant High | S01/C01 confirms highs are foundational and C01 gives turn-scale extrema, but no universal detector is fixed | PARTIAL / candidate evidence |
-| NS1-OI-002 Significant Low | Same as High | PARTIAL / candidate evidence |
-| NS1-OI-003 Swing | Turn definitions are sourced, but Swing=Turn is not established | UNRESOLVED |
-| NS1-OI-004 HL | S03 directly defines basic HL placement; C01 defines large-Dow HL purpose | PARTIAL / candidate evidence |
-| NS1-OI-005 TL | S03 directly defines basic TL drawing; C01 adds large/small Dow usage | PARTIAL / candidate evidence |
-| NS1-OI-006 CH | S03 directly defines basic CH relation to TL | PARTIAL / candidate evidence |
+| NS1-OI-001 Significant High | R01-R03 confirm that highs are structurally required, but no universal detector is fixed | PARTIAL |
+| NS1-OI-002 Significant Low | R01-R03 confirm that lows are structurally required, but no universal detector is fixed | PARTIAL |
+| NS1-OI-003 Swing | R03 Turn semantics are confirmed; Swing=Turn is not established | UNRESOLVED / RELATIONSHIP_TBD |
+| NS1-OI-004 HL | Unchanged from NS2-A draft | PARTIAL / candidate evidence |
+| NS1-OI-005 TL | Unchanged from NS2-A draft | PARTIAL / candidate evidence |
+| NS1-OI-006 CH | Unchanged from NS2-A draft | PARTIAL / candidate evidence |
 
-No NS1 Observation is promoted to FIXED in NS2-A.
+No NS1 Observation is promoted to FIXED in NS2-A1.
 
-## 5. Observation candidates discovered
+## 5. Observation candidates
 
-The following are candidates only; NS2-A does not add IDs or definitions:
+No new Observation ID is added in NS2-A1. Turn/N-pattern may require governed representation later, but is not registered now. NO103 Swing is not merged with Turn.
 
-- Turn boundary / Turn structure
-- Dow scale / large-middle-small structural class
-- TL Zone
+## 6. User-approved differences
 
-Each requires separate `OBSERVATION_GOVERNANCE.md` processing if later deemed necessary.
-
-## 6. Source conflicts
-
-No direct source contradiction was confirmed for R01-R10 in the material inspected during NS2-A. Differences in scope/granularity are retained as review/open points rather than merged into new rules.
+R01-R03 differences from the external baseline Rule Ledger are recorded in `review/NS2_A_R01_R03_CONFIRMATION.md`. The external ledger itself is not directly overwritten.
 
 ## 7. Stop condition
 
-R01-R10 remain `REVIEW_REQUIRED`; rules with required visual review also remain `IMAGE_REVIEW_PENDING`. No rule is `CONFIRMED`. NS2-B must not begin until user review/disposition of NS2-A has been performed.
+R01-R03 are confirmed at the Rule-semantics level as specified above. R03 detector implementation remains `N_PATTERN_DETECTION_TBD`. R04-R10 remain exactly at NS2-A review status and are not confirmed. NS2-B must not begin until further user instruction.

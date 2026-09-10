@@ -1,0 +1,11 @@
+Rule,Name,Status,PrimaryStageProposal,SecondaryStageProposal,ObservationDependency,ImageReview,PrimarySource,SourceLocator,SourceConflict,UserJudgment
+R01,高値・安値が土台,REVIEW_REQUIRED,Environment,Observation,"NO101;NO102",RECOMMENDED,"S01;C01","S01 high/low foundation section; C01 pp13-15",NONE,未確認
+R02,トレンドの定義,REVIEW_REQUIRED,Environment,Observation,"NO101;NO102",RECOMMENDED,S01,"S01 動画重要ポイント 1-2",NONE,未確認
+R03,ターンの区切り,"REVIEW_REQUIRED;IMAGE_REVIEW_PENDING",Environment,Observation,"NO101;NO102;NO103=DEPENDENCY_TBD",REQUIRED,"C01;S01","S01 ターンの概念; C01 pp14-15",NONE,未確認
+R04,大・中・小ダウを目的で分ける,"REVIEW_REQUIRED;IMAGE_REVIEW_PENDING",Environment,"Phase;Setup","OBSERVATION_CANDIDATE=Turn/DowScale",REQUIRED,"C01;C02","C01 pp13-17; C02 pp14-15",NONE,未確認
+R05,ラインは目的で選ぶ,REVIEW_REQUIRED,Environment,Observation,DEPENDENCY_TBD,OPTIONAL,S03,"S03 line-purpose section before ラインの種類と性質",NONE,未確認
+R06,基本ライン,"REVIEW_REQUIRED;IMAGE_REVIEW_PENDING",Observation,Environment,"NO201;NO202;NO203",REQUIRED,"S03;S06","S03 1)ラインの種類; S06=SOURCE_LOCATOR_TBD",NONE,未確認
+R07,大ダウのライン,"REVIEW_REQUIRED;IMAGE_REVIEW_PENDING",Environment,"Observation;Phase","NO201;NO202;DowScale=TBD",REQUIRED,C01,"C01 p16",NONE,未確認
+R08,小ダウのライン,"REVIEW_REQUIRED;IMAGE_REVIEW_PENDING",Setup,"Environment;Observation","NO201;NO202;NO203;SmallDowScale=TBD",REQUIRED,C01,"C01 p17",NONE,未確認
+R09,トレンドラインゾーン,"REVIEW_REQUIRED;IMAGE_REVIEW_PENDING",Observation,Environment,"NO202;OBSERVATION_CANDIDATE=TLZone",REQUIRED,S04,"S04 ゾーンの取り方",NONE,未確認
+R10,フィールドとアクションを分ける,REVIEW_REQUIRED,Environment,"Setup;Trigger",DEPENDENCY_TBD,RECOMMENDED,C02,"C02 p14",NONE,未確認

@@ -1,48 +1,33 @@
 # NS2-A User Review R01-R10
 
-Status: **R01-R05 CONFIRMED / R06 CONFIRMED_BASIC + VISUAL_SELECTION_TBD / R07-R10 USER REVIEW REQUIRED**
+Status: **R01-R05 CONFIRMED / R06 CONFIRMED_BASIC + VISUAL_SELECTION_TBD / R07-R09 CONFIRMED_RULE + selection TBD / R10 CONFIRMED**
 
-このファイルはNS2-Aのユーザー確認記録です。R01-R03はNS2-A1、R04-R06はNS2-A2でユーザー確認結果を反映済みです。R07-R10は引き続き `未確認` であり、`CONFIRMED` ではありません。
+このファイルはNS2-Aのユーザー確認記録です。R01-R03はNS2-A1、R04-R06はNS2-A2、R07-R10はNS2-A3でユーザー確認結果を反映しています。R11以降は未処理です。
 
 ## 1. 一覧レビュー
 
-| Rule | 簡単に言うと | 主Source | Stage | Observation依存 | 画像確認 | 不明点 | ユーザー判定 |
-|---|---|---|---|---|---|---|---|
-| R01 | まず高値・安値を読む。そこが全分析の土台。 | S01 / C01 | Environment (CONFIRMED) | NO101/NO102 | OPTIONAL | 重要高安の厳密な検出規則 | OK |
-| R02 | 高値と安値が両方切り上がれば上昇、両方切り下がれば下降。それ以外は上昇でも下降でもない。 | S01 | Environment (CONFIRMED) | NO101/NO102 | OPTIONAL | 重要高安の厳密な選択アルゴリズム | OK / 修正反映済み |
-| R03 | N字が1つ形成された後、上昇側はその区間の最安値、下降側は最高値をターン起点として遡って確定する。 | C01 / S01 + user-confirmed clarification | Environment (CONFIRMED) | NO101/NO102、NO103はRELATIONSHIP_TBD | Rule定義は確認済み / Detector検証は後続 | N_PATTERN_DETECTION_TBD、Swingとの関係 | OK / 修正反映済み |
-| R04 | 大・中・小ダウは構造尺度と分析目的で使い分け、時間足へ固定しない。 | C01 / C02 + user-confirmed clarification | Environment (CONFIRMED) | Turn/Dow scaleはGoverned candidate、DetectorはTBD | Rule定義は確認済み / Detector検証は後続 | DOW_SCALE_DETECTION_TBD | OK / 修正反映済み |
-| R05 | ラインは買い手・売り手の意識と現在のフィールドを視覚化する目的で選ぶ。 | S03 | Environment (CONFIRMED) | TBD | OPTIONAL | 実装上の選択基準は後続 | OK |
-| R06 | HL/TL/CHの基本形は確定。複数候補からどの点を選ぶかは未確定。 | S03 / S06 + A2画像確認 | Observation (CONFIRMED BASIC) | NO201/NO202/NO203 | 基本形確認済み / 選択規則TBD | VISUAL_SELECTION_TBD | 基本OK / 画像確認済み・選択規則TBD |
-| R07 | 大ダウラインは広いフィールドと際を見るための線。 | C01 | Environment | NO201/NO202 + 尺度TBD | REQUIRED | TL始点の具体選択 | 未確認 |
-| R08 | 小ダウラインは局面内のBRやEntryアクションを見るための線。 | C01 | Setup | NO201/NO202/NO203 + 尺度TBD | REQUIRED | 大/中との境界 | 未確認 |
-| R09 | TLは線一本でなくゾーンとして扱い、基本形と応用形がある。 | S04 | Observation | NO202 + TL Zone候補 | REQUIRED | β版制御文と教材表現の関係 | 未確認 |
-| R10 | フィールドは戦場の面、アクションはそこで起きる変化。 | C02 | Environment | TBD | RECOMMENDED | FieldをObservation化するか | 未確認 |
+| Rule | 簡単に言うと | 主Source | Primary Stage | 主な未解決 | Status | ユーザー判定 |
+|---|---|---|---|---|---|---|
+| R01 | 高値・安値の読み取りを全分析の土台にする。 | S01 / C01 | Environment | significant high/low detector | CONFIRMED | OK |
+| R02 | 高値・安値がともに切上げ=上昇、ともに切下げ=下降。それ以外はどちらでもない。 | S01 | Environment | high/low selection | CONFIRMED | OK / 修正反映済み |
+| R03 | N字形成後、上昇側は最安値、下降側は最高値をターン起点として遡及確定する。 | C01 / S01 + user clarification | Environment | N_PATTERN_DETECTION_TBD / Swing関係 | CONFIRMED_RULE / DETECTION_TBD | OK / 修正反映済み |
+| R04 | 大・中・小ダウは構造尺度と分析目的で使い分け、時間足へ固定しない。 | C01 / C02 + user clarification | Environment | DOW_SCALE_DETECTION_TBD | CONFIRMED_RULE / DOW_SCALE_DETECTION_TBD | OK / 修正反映済み |
+| R05 | ラインは買い手・売り手の意識とFieldを視覚化する目的で選ぶ。 | S03 | Environment | line candidate selection | CONFIRMED | OK |
+| R06 | HL/TL/CHの基本形を固定する。 | S03 / S06 + A2画像 | Observation | VISUAL_SELECTION_TBD | CONFIRMED_BASIC / VISUAL_SELECTION_TBD | 基本OK / 画像確認済み |
+| R07 | 大ダウラインは広い構造の外側、広範囲Fieldと際を見る。 | C01 + user clarification | Environment | LARGE_DOW_LINE_SELECTION_TBD | CONFIRMED_RULE / LINE_SELECTION_TBD | OK / LINE_SELECTION_TBD |
+| R08 | 小ダウラインは一局面内の細かな構造、近い対称関係・クラスターを捉える。 | C01 + user clarification | Setup | SMALL_DOW_LINE_SELECTION_TBD | CONFIRMED_RULE / LINE_SELECTION_TBD | OK / Entry削除 / Selection TBD |
+| R09 | TLはゾーンとして扱い、基本形と2つの応用形がある。反応履歴は信頼度補強。 | S04 + user clarification | Observation | TL_ZONE_APPLICATION_SELECTION_TBD | CONFIRMED_RULE / APPLICATION_SELECTION_TBD | OK / β独自制御削除 / 反応履歴追加 |
+| R10 | Field=戦場の面、Action=そこで起きる変化。Area分けし内部はより細かな構造で見る。 | C02 + user clarification | Environment | FIELD_REPRESENTATION_TBD | CONFIRMED | OK / Area・細部引継ぎ追加 |
 
 ---
 
 ## R01｜高値・安値が土台
 
-【正式定義】  
-トレンド判断、ライン選択、トレードプランは、高値・安値の読み取りを土台にする。
-
-【簡単に言うと】  
-まず高値と安値を見る。そこが野田式分析の出発点。
-
-【AIはこう理解している】  
-野田式の環境認識を開始する前提ルール。高値・安値そのものの厳密な選び方は別途定義が必要。
-
-【主Source】 S01 `04 トレンドの判断方法.txt`  
-【補助Source】 C01 `短期集中コース 1回目.pdf`  
-【Stage】 Primary: Environment (CONFIRMED)  
-【Observation依存】 NO101, NO102  
-【画像確認】 Rule Definitionの確定には不要。将来の検出・回帰例では使用可能。  
-【不明点】 どのRaw High/Lowを「読むべき高値・安値」と採用するかの厳密なDetector。  
-【Source Conflict】 なし  
+【正式定義】トレンド判断、ライン選択、トレードプランは、高値・安値の読み取りを土台にする。  
+【Stage】 Environment  
+【Status】 CONFIRMED  
+【未解決】 significant high/lowの厳密なDetector。  
 【ユーザー判定】 OK
-
-【ユーザー承認済み差分】  
-現行基準Rule Ledgerの「インジケーターを先に見て方向を決めない」は今回の正式定義から除外する。補助ルール、注記、OPEN ISSUE等としても残さない。変更理由=`USER_REVIEW_APPROVED_CLARIFICATION`。
 
 ---
 
@@ -53,100 +38,48 @@ Status: **R01-R05 CONFIRMED / R06 CONFIRMED_BASIC + VISUAL_SELECTION_TBD / R07-R
 - 下降トレンド：高値と安値がともに切り下がって推移する。  
 - それ以外：上昇トレンドでも下降トレンドでもない。
 
-`NOT_UP_OR_DOWN` は新しいトレンド種類ではなく、上昇・下降のどちらの条件にも該当しない否定状態としてのみ扱う。
-
-【簡単に言うと】  
-高値・安値が両方上なら上昇、両方下なら下降。それ以外を勝手にレンジや横ばいへ分類しない。
-
-【AIはこう理解している】  
-トレンド定義は上昇・下降の2種類。判定出力は必要に応じ `UPTREND / DOWNTREND / NOT_UP_OR_DOWN` の3状態を表現できる。
-
-【主Source】 S01 `04 トレンドの判断方法.txt`  
-【補助Source】 なし  
-【Stage】 Primary: Environment (CONFIRMED)  
-【Observation依存】 NO101, NO102  
-【画像確認】 Rule Definitionの確定には不要。将来の回帰テスト例として使用可能。  
-【不明点】 NO101/NO102の厳密な選択アルゴリズム。  
-【Source Conflict】 なし  
+`NOT_UP_OR_DOWN` は第三のトレンド種類ではなく否定状態。レンジ等へ自動分類しない。  
+【Stage】 Environment  
+【Status】 CONFIRMED  
 【ユーザー判定】 OK / 修正反映済み
-
-【ユーザー承認済み差分】  
-現行基準Rule Ledgerの「方向未確定、レンジ、またはターン変化候補」という自動分類は採用しない。変更理由=`USER_REVIEW_APPROVED_CLARIFICATION`。
 
 ---
 
 ## R03｜ターンの区切り
 
 【正式定義】  
-- 上昇側：N字が1つ形成された後に、そのN字を形成する区間の最安値が確定し、その最安値をターンの起点として遡って確定する。  
-- 下降側：N字が1つ形成された後に、そのN字を形成する区間の最高値が確定し、その最高値をターンの起点として遡って確定する。
+- 上昇側：N字が1つ形成された後、その区間の最安値をターン起点として遡って確定する。  
+- 下降側：N字が1つ形成された後、その区間の最高値をターン起点として遡って確定する。
 
-ターン起点は高値・安値候補が出現した瞬間に即時確定するのではなく、N字形成後に `candidate` から `confirmed turn origin` へ遡及確定する。
-
-【簡単に言うと】  
-N字が1つできてから、そのN字の始まりとなる極値を後からターン起点として確定する。上昇側は最安値、下降側は最高値。
-
-【AIはこう理解している】  
-後続の大中小ダウ、ライン、局面が利用するEnvironmentの構造認識ルール。Ruleの意味は確認済みだが、OHLCからN字完成を機械判定するDetectorはまだ定義しない。
-
-【主Source】 C01 / S01（ターン概念・大小ターンの文脈）  
-【ユーザー確認】 N字形成後の遡及起点確定を `USER_REVIEW_APPROVED_CLARIFICATION` として反映。既存SourceがこのN字文言を直接記載しているとは扱わない。  
-【Stage】 Primary: Environment (CONFIRMED)  
-【Observation依存】 NO101, NO102。NO103 Swingとの関係は `RELATIONSHIP_TBD`。  
-【画像確認】 Rule DefinitionはCONFIRMED。Visual Detector verificationは後続工程。  
-【不明点】 `N_PATTERN_DETECTION_TBD`。SwingとTurnの関係。  
-【Source Conflict】 なし  
+候補極値の出現時点では確定せず、N字形成後に `candidate -> confirmed turn origin` とする。  
+【Stage】 Environment  
+【Status】 CONFIRMED_RULE / DETECTION_TBD  
+【未解決】 `N_PATTERN_DETECTION_TBD`、NO103 Swingとの関係=`RELATIONSHIP_TBD`。  
 【ユーザー判定】 OK / 修正反映済み
-
-【不採用】  
-左ターンの最後の戻り高値/押し安値抜け条件、および38%戻し条件は今回の体系へ一切登録しない。
 
 ---
 
 ## R04｜大・中・小ダウを目的で分ける
 
-【正式定義】  
-大・中・小ダウは、値動きの構造尺度と分析目的によって使い分ける。
-
+【正式定義】大・中・小ダウは、値動きの構造尺度と分析目的によって使い分ける。  
 - 大ダウ：広範囲のフィールドと際を捉える。  
 - 中ダウ：大ダウ内の途中の構造・フィールドを捉える。  
 - 小ダウ：局面内の細かな構造とアクションを捉える。  
-- 大・中・小ダウを特定の時間足へ固定しない。
+- 特定時間足へ固定しない。
 
-【簡単に言うと】  
-大は全体の戦場、中はその途中、小は局面内部の細かな構造を見る。同じ時間足でも構造尺度と目的を分けて読む。
-
-【AIはこう理解している】  
-大・中・小は時間足そのものではなく、構造スケールと分析目的の区分。小ダウの定義へEntry候補を持ち込まず、Entryは後続責務へ分離する。BRもR04の定義条件とはせず、必要なら後続ルールで小ダウを利用する。
-
-【主Source】 C01 / C02  
-【ユーザー確認】 構造尺度＋分析目的、時間足固定なし、Entry候補をR04定義から除外する整理を承認。変更理由=`USER_REVIEW_APPROVED_CLARIFICATION`。  
-【Stage】 Primary: Environment (CONFIRMED)  
-【Observation依存】 Turn / Dow scaleのGoverned representationは後続検討。新Observation IDは追加しない。  
-【画像確認】 Rule DefinitionはCONFIRMED。大中小の機械的な尺度判定は後続。  
-【不明点】 `DOW_SCALE_DETECTION_TBD`。  
-【Source Conflict】 なし  
+Entryは定義から除外。BRも小ダウそのものの定義にしない。  
+【Stage】 Environment  
+【Status】 CONFIRMED_RULE / DOW_SCALE_DETECTION_TBD  
 【ユーザー判定】 OK / 修正反映済み
 
 ---
 
-## R05｜ラインは「引けた」ではなく「目的で選ぶ」
+## R05｜ラインは目的で選ぶ
 
-【正式定義】  
-ラインは、買い手・売り手の意識と現在のフィールドを視覚化する目的で選ぶ。
-
-【簡単に言うと】  
-引ける線を全部引くのではなく、今の戦場を理解するために必要な線を選ぶ。
-
-【AIはこう理解している】  
-幾何学的に引ける線を増やすためのルールではなく、Environmentでラインを使う目的を固定するルール。
-
-【主Source】 S03 `06 ラインの種類、引き方.txt`  
-【Stage】 Primary: Environment (CONFIRMED)  
-【Observation依存】 具体的なラインObservationとの対応は後続。  
-【画像確認】 Rule Definition確定には不要。  
-【不明点】 複数候補からどのラインを選ぶかという実装規則はR05本体では固定しない。  
-【Source Conflict】 なし  
+【正式定義】ラインは、買い手・売り手の意識と現在のフィールドを視覚化する目的で選ぶ。  
+【Stage】 Environment  
+【Status】 CONFIRMED  
+【未解決】 複数候補からの実装上の選択基準。  
 【ユーザー判定】 OK
 
 ---
@@ -157,112 +90,97 @@ N字が1つできてから、そのN字の始まりとなる極値を後から�
 - HL：価格が反転している高値・安値に水平に引く。  
 - 上昇TL：切り上げた2点の安値で引く。  
 - 下降TL：切り下げた2点の高値で引く。  
-- CH：TLと平行にし、上昇CHは直近高値、下降CHは直近安値へ合わせる。
+- CH：TLと平行にし、上昇CHは直近高値側、下降CHは直近安値側へ合わせる。
 
-【簡単に言うと】  
-HLは高値・安値への水平線、上昇TLは安値2点、下降TLは高値2点、CHはTLと平行に反対側へ合わせる。ここまでは基本形。
-
-【AIはこう理解している】  
-R06はHL/TL/CHの基本幾何を固定する。複数の有効候補があるとき、どの始点・終点・反転高安を採るかはR06の基本形だけからは確定しない。
-
-【主Source】 S03 `06 ラインの種類、引き方.txt`  
-【補助Source】 S06 `10 ラインの引き方例.txt` の `前回までのおさらい -> 1）ラインの種類`。基本形を再確認。  
-【Stage】 Primary: Observation (CONFIRMED BASIC) / Secondary: Environment  
+【Stage】 Observation / Secondary: Environment  
+【Status】 CONFIRMED_BASIC / VISUAL_SELECTION_TBD  
 【Observation依存】 NO201, NO202, NO203  
-【画像確認】 先生修正画像の日足・4時間足・1時間足・波動AB・最終をA2 visual evidenceとして確認。描画された構造尺度は確認できるが、複数候補からのライン選択優先順位を一意に定義できる直接証拠とは扱わない。  
-【不明点】 `VISUAL_SELECTION_TBD`：複数候補時の始点・終点・HL・CH対応点の選択規則。  
-【Source Conflict】 なし  
+【画像確認】 基本形は確認済み。複数候補選択は画像のみでは一意化しない。  
 【ユーザー判定】 基本OK / 画像確認済み・選択規則TBD
-
-【責務分離】  
-ユーザー補足で示された「最外側の大ダウTLの役割」「ターンを跨ぐ中ダウライン」「ラインでエリア分けし、ライン間を下位足で捉える」という内容はR06の基本形へ混ぜない。大ダウTLはR07、エリア分け・フィールドはR10でユーザーレビュー時に正式整理する。R07/R10の現行内容は本工程では変更しない。
 
 ---
 
 ## R07｜大ダウのライン
 
 【正式定義】  
-大ダウTLは選択時点で一度も抜かれていない線を基本とし、始点が絶対的な最安値・最高値とは限らない。大ダウHLは一つの大きなターン中の最安値・最高値。用途は広範囲のフィールドと際を捉えること。
+大ダウラインは、広いトレンド構造の外側を捉え、広範囲のフィールドと際を認識するために使用する。
 
-【簡単に言うと】  
-大ダウラインは大きな戦場と際を見るための線。細かいEntry線とは役割が違う。
+- 大ダウTL：選択時点で一度も抜かれていないラインを基本とする。始点は絶対的な最安値・最高値とは限らない。  
+- 大ダウHL：一つの大きなターン中の最安値・最高値に置く。  
+- 際への接近：価格が大ダウの際へ接近した場合は、反応・反転の可能性を重要警戒する。
 
-【AIはこう理解している】  
-Environmentで上位の戦場を定義する重要ルール。
-
-【主Source】 C01 p.16付近  
-【Stage候補】 Primary: Environment / Secondary: Observation / Phase  
-【Observation依存】 NO201, NO202。大ダウ尺度はTBD。  
-【画像確認】 REQUIRED  
-【不明点】 最安値・最高値以外を始点にできる具体的条件。  
-【Source Conflict】 なし  
-【ユーザー判定】 未確認
+【簡単に言うと】 大きな戦場の外枠と際を見るライン。接近時は反応を警戒するが、反転を保証しない。  
+【主Source】 C01 `短期集中コース 1回目.pdf`  
+【Stage】 Primary: Environment / Secondary: Observation, Phase  
+【Observation依存】 NO201, NO202。Dow scale detectorは別途TBD。  
+【未解決】 `LARGE_DOW_LINE_SELECTION_TBD`。複数の有効候補からの機械選択は未確定。  
+【不採用】 最外側なら必ず採用、最古/最新、接触回数最大、最緩角度、ATR、値幅、足数等の未出典選択規則。  
+【ユーザー判定】 OK / LINE_SELECTION_TBD  
+【Status】 CONFIRMED_RULE / LINE_SELECTION_TBD
 
 ---
 
 ## R08｜小ダウのライン
 
 【正式定義】  
-小ダウラインは一つの局面内で引き、近い対称関係や値動きのクラスターに着目する。主用途は小ダウBRやEntryアクションで、全体フィールドの代用にはしない。
+小ダウラインは、一つの局面内の細かな構造を捉えるために使用する。近い対称関係や値動きのクラスターに着目して選ぶ。小ダウBRを確認するために使用する場合が多い。大ダウ・中ダウが担う広いフィールド認識の代用にはしない。
 
-【簡単に言うと】  
-小ダウラインは大局を見る線ではなく、局面内のBRやEntry候補を見るための近距離の線。
-
-【AIはこう理解している】  
-Environmentで認識した構造からSetup候補へ橋渡しするライン。
-
-【主Source】 C01 p.17付近  
-【Stage候補】 Primary: Setup / Secondary: Environment / Observation  
-【Observation依存】 NO201/NO202/NO203。小ダウ尺度はTBD。  
-【画像確認】 REQUIRED  
-【不明点】 大ダウ・中ダウとの境界と、クラスター選択の具体性。  
-【Source Conflict】 なし  
-【ユーザー判定】 未確認
+【簡単に言うと】 局面内部の近い構造を見るライン。BRには使うがEntryそのものは定義しない。  
+【主Source】 C01 `短期集中コース 1回目.pdf`  
+【Stage】 Primary: Setup / Secondary: Environment, Observation  
+【Observation依存】 NO201, NO202, NO203との関係あり得る。  
+【未解決】 `SMALL_DOW_LINE_SELECTION_TBD`。「近い」の距離、クラスター本数、反応回数等は未定義。  
+【ユーザー承認差分】 Entry表現を正式定義から削除。BRは用途であり小ダウラインの定義そのものではない。  
+【ユーザー判定】 OK / Entry削除 / Selection TBD  
+【Status】 CONFIRMED_RULE / LINE_SELECTION_TBD
 
 ---
 
 ## R09｜トレンドラインゾーン
 
 【正式定義】  
-S04では、基本形を始点ローソク足のヒゲから実体までとし、CH側ゾーンからの逆輸入、上昇TLでは一段上・下降TLでは一段下のローソク足実体までという応用系も説明している。
+トレンドラインは一本の線だけでなくゾーンとして扱う。
 
-【簡単に言うと】  
-TLは一本の価格線としてだけでなく幅のあるゾーンとして見る。最初は始点のヒゲ～実体が基本。
+- 基本形：始点ローソク足のヒゲから実体までをゾーンとする。  
+- 応用形1：チャネルライン側のゾーンから逆輸入する方法がある。  
+- 応用形2：上昇TLは一段上、下降TLは一段下のローソク足実体まで広げる方法がある。
 
-【AIはこう理解している】  
-TLそのもの(NO202)に付随する空間的な観測表現。将来TL Zoneを別Observationにするか検討が必要。
+過去または途中で価格反応が確認できる場合、そのライン／ゾーンが市場で意識されている可能性を補強する材料とし、信頼度を高める要素として扱う。反応履歴は必須条件でも正解保証でもない。
 
 【主Source】 S04 `07 トレンドラインゾーンの取り方.txt`  
-【Stage候補】 Primary: Observation / Secondary: Environment  
-【Observation依存】 NO202 + TL Zone候補  
-【画像確認】 REQUIRED  
-【不明点】 現行台帳の「β版通常判断は基本形優先」という運用文と、教材の練習推奨表現の関係。  
-【Source Conflict】 なし（ただし運用表現の整理は必要）  
-【ユーザー判定】 未確認
+【Stage】 Primary: Observation / Secondary: Environment  
+【Observation依存】 NO202。TL Zoneは将来のObservation候補だが新IDは作らない。  
+【ユーザー承認差分】 β版の「基本形優先・応用は反応履歴と理由がある場合だけ」という独自制御文を正式定義から削除。反応履歴は `confidence reinforcement` として追加。  
+【未解決】 `TL_ZONE_APPLICATION_SELECTION_TBD`。どの状況で応用形を選ぶか、反応回数・pips幅・スコア等は未定義。  
+【ユーザー判定】 OK / β独自制御削除 / 反応履歴追加 / Selection TBD  
+【Status】 CONFIRMED_RULE / APPLICATION_SELECTION_TBD
 
 ---
 
 ## R10｜フィールドとアクションを分ける
 
 【正式定義】  
-フィールドは戦場の際から際までの面を捉える視点、アクションは買いと売りの力関係の変化やフィールドの抜き差しを捉える視点として分ける。
+- Field：際から際までの戦場を「面」として捉える。大・中・小ダウの構造に応じ、ラインや際によって相場を複数のField / Areaとして捉える。  
+- Action：そのFieldや際で発生する値動き、および買い手・売り手の力関係の変化を捉える。  
+- Field内部：ラインや際の付近ではActionや反応を確認し、ライン間の内部値動きは必要に応じてより細かな構造で確認する。
 
-【簡単に言うと】  
-フィールドは「どこが戦場か」、アクションは「そこで何が変わったか」。
-
-【AIはこう理解している】  
-Environmentの面の認識と、その後のSetup/Triggerとなる変化を混同しないための境界ルール。
-
-【主Source】 C02 p.14付近  
-【Stage候補】 Primary: Environment / Secondary: Setup / Trigger  
-【Observation依存】 TBD  
-【画像確認】 RECOMMENDED  
-【不明点】 FieldをObservation層にするか、Environment出力として持つか。  
-【Source Conflict】 なし  
-【ユーザー判定】 未確認
+【簡単に言うと】 Fieldは「どこが戦場か」、Actionは「そこで何が変わったか」。  
+【主Source】 C02 `短期集中コース 2回目.pdf` + user clarification  
+【Stage】 Primary: Environment / Secondary: Setup, Trigger  
+【時間足】 必ず下位足へ落とすとはしない。Dow Scaleと時間足を固定マッピングしない。  
+【未解決】 `FIELD_REPRESENTATION_TBD`。独立ObservationかEnvironment出力かは後続Governance。  
+【責務境界】 BR成立、Return成立、Entry、SL、TP、発注は後続。  
+【ユーザー判定】 OK / エリア分け・細部構造への引継ぎ追加  
+【Status】 CONFIRMED
 
 ---
 
-## 2. レビュー推奨順
+## 2. NS1 / Observationへの影響
 
-R01-R03はNS2-A1で確認済み。R04-R06はNS2-A2でユーザー確認済みで、R06は基本形のみ確定し選択規則を `VISUAL_SELECTION_TBD` として残す。次はユーザー指示後に `R07-R10` をレビューする。
+- R06-R08はNO201/NO202/NO203との関係を持つが、本工程ではこれらをFIXEDへ昇格しない。
+- R09のTL Zone、R10のField/Actionについて新Observation IDは追加しない。
+- NS1 Observation status変更はOBSERVATION_GOVERNANCEに従う別工程とする。
+
+## 3. Stop condition
+
+R01-R10のユーザーレビュー結果は上記状態で固定。R07/R08のline selection、R09のapplication selection、R10のField representationは実装上TBDとして分離する。R11以降およびNS2-Bには進まない。

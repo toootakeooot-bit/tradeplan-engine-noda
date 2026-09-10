@@ -2,9 +2,9 @@ Rule,Name,Status,PrimaryStageProposal,SecondaryStageProposal,ObservationDependen
 R01,高値・安値が土台,CONFIRMED,Environment(CONFIRMED),Observation,"NO101;NO102",OPTIONAL,"S01;C01","S01 high/low foundation section; C01 pp13-15",NONE,OK
 R02,トレンドの定義,CONFIRMED,Environment(CONFIRMED),Observation,"NO101;NO102",OPTIONAL,S01,"S01 動画重要ポイント 1-2",NONE,"OK / 修正反映済み"
 R03,ターンの区切り,"CONFIRMED_RULE;DETECTION_TBD",Environment(CONFIRMED),Observation,"NO101;NO102;NO103=RELATIONSHIP_TBD","RULE_CONFIRMED;DETECTOR_REVIEW_LATER","C01;S01;USER_REVIEW_APPROVED_CLARIFICATION","S01 ターンの概念; C01 pp14-15; N-pattern exact wording=user-confirmed clarification",NONE,"OK / 修正反映済み"
-R04,大・中・小ダウを目的で分ける,"REVIEW_REQUIRED;IMAGE_REVIEW_PENDING",Environment,"Phase;Setup","OBSERVATION_CANDIDATE=Turn/DowScale",REQUIRED,"C01;C02","C01 pp13-17; C02 pp14-15",NONE,未確認
-R05,ラインは目的で選ぶ,REVIEW_REQUIRED,Environment,Observation,DEPENDENCY_TBD,OPTIONAL,S03,"S03 line-purpose section before ラインの種類と性質",NONE,未確認
-R06,基本ライン,"REVIEW_REQUIRED;IMAGE_REVIEW_PENDING",Observation,Environment,"NO201;NO202;NO203",REQUIRED,"S03;S06","S03 1)ラインの種類; S06=SOURCE_LOCATOR_TBD",NONE,未確認
+R04,大・中・小ダウを目的で分ける,"CONFIRMED_RULE;DOW_SCALE_DETECTION_TBD",Environment(CONFIRMED),"Phase;Setup relationship retained","OBSERVATION_CANDIDATE=Turn/DowScale; no new ID","RULE_CONFIRMED;DETECTOR_REVIEW_LATER","C01;C02;USER_REVIEW_APPROVED_CLARIFICATION","C01 pp13-17; C02 pp14-15; no fixed timeframe mapping",NONE,"OK / 修正反映済み"
+R05,ラインは目的で選ぶ,CONFIRMED,Environment(CONFIRMED),Observation,DEPENDENCY_TBD,OPTIONAL,S03,"S03 line-purpose section before ラインの種類と性質",NONE,OK
+R06,基本ライン,"CONFIRMED_BASIC;VISUAL_SELECTION_TBD",Observation(CONFIRMED),Environment,"NO201;NO202;NO203","BASIC_CONFIRMED;VISUAL_SELECTION_TBD","S03;S06;A2 visual review","S03 1)ラインの種類; S06 前回までのおさらい 1)ラインの種類; teacher-corrected image set reviewed",NONE,"基本OK / 画像確認済み・選択規則TBD"
 R07,大ダウのライン,"REVIEW_REQUIRED;IMAGE_REVIEW_PENDING",Environment,"Observation;Phase","NO201;NO202;DowScale=TBD",REQUIRED,C01,"C01 p16",NONE,未確認
 R08,小ダウのライン,"REVIEW_REQUIRED;IMAGE_REVIEW_PENDING",Setup,"Environment;Observation","NO201;NO202;NO203;SmallDowScale=TBD",REQUIRED,C01,"C01 p17",NONE,未確認
 R09,トレンドラインゾーン,"REVIEW_REQUIRED;IMAGE_REVIEW_PENDING",Observation,Environment,"NO202;OBSERVATION_CANDIDATE=TLZone",REQUIRED,S04,"S04 ゾーンの取り方",NONE,未確認

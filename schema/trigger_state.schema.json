@@ -1,0 +1,103 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/noda/trigger_state.schema.json",
+  "title": "NODA TriggerState",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["stage", "trigger_status", "trigger_type", "break_state", "return_state", "awareness_revival", "formation_break", "return_move_observation", "tl_ch_break_context", "evidence_refs", "unresolved"],
+  "properties": {
+    "stage": {"const": "TRIGGER"},
+    "environment_ref": {"type": ["string", "null"]},
+    "phase_ref": {"type": ["string", "null"]},
+    "setup_ref": {"type": ["string", "null"]},
+    "trigger_status": {"enum": ["TRUE", "FALSE", "UNKNOWN", "NOT_EVALUATED"]},
+    "trigger_type": {
+      "enum": [
+        "SMALL_DOW_BR",
+        "AWARENESS_REVIVAL_SMALL",
+        "AWARENESS_REVIVAL_LARGE",
+        "REVERSAL_FORMATION_ACTION",
+        "CONTINUATION_FORMATION_BREAK",
+        "SOURCE_DEFINED_OTHER",
+        "NONE",
+        "UNKNOWN"
+      ]
+    },
+    "break_state": {"enum": ["TRUE", "FALSE", "UNKNOWN", "NOT_EVALUATED"]},
+    "return_state": {"enum": ["TRUE", "FALSE", "UNKNOWN", "NOT_EVALUATED"]},
+    "awareness_revival": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["state", "scope", "evidence_refs"],
+      "properties": {
+        "state": {"enum": ["TRUE", "FALSE", "UNKNOWN", "NOT_EVALUATED"]},
+        "scope": {"enum": ["SMALL", "LARGE", "NONE", "UNKNOWN"]},
+        "evidence_refs": {"type": "array", "items": {"type": "string"}},
+        "notes": {"type": "string"}
+      }
+    },
+    "formation_break": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["state", "formation_type", "direction_relation", "evidence_refs"],
+      "properties": {
+        "state": {"enum": ["TRUE", "FALSE", "UNKNOWN", "NOT_EVALUATED"]},
+        "formation_type": {"enum": ["REVERSAL", "CONTINUATION", "NONE", "UNKNOWN"]},
+        "direction_relation": {"enum": ["REVERSAL_SIDE", "CONTINUATION_SIDE", "UNRESOLVED", "NOT_EVALUATED"]},
+        "evidence_refs": {"type": "array", "items": {"type": "string"}},
+        "notes": {"type": "string"}
+      }
+    },
+    "return_move_observation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["state", "evidence_refs"],
+      "properties": {
+        "state": {"enum": ["TRUE", "FALSE", "UNKNOWN", "NOT_EVALUATED"]},
+        "evidence_refs": {"type": "array", "items": {"type": "string"}},
+        "notes": {"type": "string"}
+      }
+    },
+    "tl_ch_break_context": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["resolution", "break_type", "meaning", "evidence_refs"],
+      "properties": {
+        "resolution": {"enum": ["KNOWN", "UNKNOWN", "NOT_EVALUATED"]},
+        "break_type": {"enum": ["TL_BREAK", "CH_BREAK", "UNKNOWN", "NOT_EVALUATED"]},
+        "meaning": {"enum": ["TURN_CANDIDATE", "CONTINUATION_ACCELERATION_CANDIDATE", "UNKNOWN", "NOT_EVALUATED"]},
+        "evidence_refs": {"type": "array", "items": {"type": "string"}},
+        "notes": {"type": "string"}
+      }
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["rule_ref", "state", "evidence_refs"],
+        "properties": {
+          "rule_ref": {"enum": ["R14", "R15", "R16", "R19", "R20", "R28", "R29", "OTHER_SOURCE_DEFINED"]},
+          "state": {"enum": ["SUPPORTS", "DOES_NOT_SUPPORT", "UNKNOWN", "NOT_EVALUATED"]},
+          "evidence_refs": {"type": "array", "items": {"type": "string"}},
+          "notes": {"type": "string"}
+        }
+      }
+    },
+    "evidence_refs": {"type": "array", "items": {"type": "string"}},
+    "unresolved": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["code", "description"],
+        "properties": {
+          "code": {"type": "string"},
+          "description": {"type": "string"},
+          "rule_ref": {"type": ["string", "null"]},
+          "affected_fields": {"type": "array", "items": {"type": "string"}}
+        }
+      }
+    }
+  }
+}

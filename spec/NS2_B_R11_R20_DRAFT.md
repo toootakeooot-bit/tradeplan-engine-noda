@@ -1,12 +1,14 @@
 # NS2-B R11-R20 Draft
 
-Status: **DRAFT / USER REVIEW REQUIRED**
+Status: **PARTIAL CONFIRMATION — R14-R16 / R19 CONFIRMED AT RULE-SEMANTICS LEVEL; R11-R13 / R17-R18 / R20 REVIEW_REQUIRED**
 
 Repository: `toootakeooot-bit/tradeplan-engine-noda`
 
 Branch: `feature/noda-v1`
 
 NS2-B start HEAD: `b92dac35b625f81f86c71bdab2265f15c49b1ef7`
+
+NS2-B1 start HEAD: `00532261164dca16232c2357a2801ae6b97cd501`
 
 Scope: **R11-R20 only**. R01-R10 remain as confirmed in NS2-A1/A2/A3. R21+ are out of scope. This file does not modify the external Rule Ledger.
 
@@ -16,21 +18,21 @@ NS2-B follows `spec/NS2_REVIEW_PROTOCOL.md`:
 
 `AI draft -> Japanese user review -> OK/修正/保留 -> required source/image verification -> final整理 -> audit -> CONFIRMED or unresolved`
 
-No R11-R20 item is `CONFIRMED` in this draft.
+NS2-B1 confirms only R14, R15, R16 and R19 at the requested rule-semantics level. R11-R13, R17-R18 and R20 remain `REVIEW_REQUIRED`.
 
 ## 2. Summary matrix
 
-| Rule | Name | Primary Stage proposal | Secondary Stage proposal | Main dependency / relation | Image review | AI confidence | Status |
+| Rule | Name | Primary Stage | Secondary Stage | Main dependency / relation | Image review | AI confidence | Status |
 |---|---|---|---|---|---|---|---|
 | R11 | 3つの局面 | Phase | Environment | R02/R04/R07/R10; Phase representation TBD | REQUIRED | HIGH semantics / MEDIUM detector | REVIEW_REQUIRED |
 | R12 | 先行期を狙う前提 | Phase | Setup | R07 edge, R08 small-Dow line, R10 Field/Action | REQUIRED | HIGH semantics | REVIEW_REQUIRED |
 | R13 | 本格局面の確認 | Phase | Setup | NO101/NO102; large-Dow edge; MA/formation auxiliary handling | REQUIRED | MEDIUM | REVIEW_REQUIRED |
-| R14 | 小ダウBR | Trigger | Phase / Setup | R07/R08; NO201/NO202; return relation | REQUIRED | HIGH semantics / MEDIUM trigger boundary | REVIEW_REQUIRED |
-| R15 | 意識の復活（小） | Trigger | Phase | small-Dow line; Turn relation | REQUIRED | HIGH | REVIEW_REQUIRED |
-| R16 | 意識の復活（大） | Trigger | Phase / Environment | large-Dow line; small-Dow cycle relation | REQUIRED | HIGH | REVIEW_REQUIRED |
+| R14 | 小ダウBR | Trigger | Phase / Setup | R07/R08; NO201/NO202; `SMALL_DOW_BR_DETECTION_TBD` | REQUIRED | HIGH semantics / MEDIUM detector | CONFIRMED_RULE / DETECTION_TBD |
+| R15 | 意識の復活（小） | Trigger | Phase | small-Dow structure; Turn; `SMALL_AWARENESS_REVIVAL_DETECTION_TBD` | REQUIRED | HIGH semantics / MEDIUM detector | CONFIRMED_RULE / DETECTION_TBD |
+| R16 | 意識の復活（大） | Trigger | Phase / Environment | large-Dow line; `SMALL_DOW_CYCLE_DETECTION_TBD` | REQUIRED | HIGH semantics / MEDIUM detector | CONFIRMED_RULE / DETECTION_TBD |
 | R17 | 中間TL・カウンターTL | Environment | Observation / Setup | NO202; Dow scale; Turn | REQUIRED | HIGH semantics / MEDIUM selection | REVIEW_REQUIRED |
 | R18 | ラインブレイク後は地図を更新 | Environment | Observation | NO101/NO102/NO202/NO203; Field remap | REQUIRED | HIGH | REVIEW_REQUIRED |
-| R19 | リターンムーブ | Trigger | Setup | NO202; support/resistance-role shift | RECOMMENDED | HIGH | REVIEW_REQUIRED |
+| R19 | リターンムーブ | Observation | Downstream search context only | NO202; `RETURN_MOVE_DETECTION_TBD`; R14/R15 downstream search relation only | RECOMMENDED | HIGH semantics / MEDIUM detector | CONFIRMED_RULE / RETURN_DETECTION_TBD |
 | R20 | TL BRとCH BRの意味 | Trigger | Environment | NO202/NO203; trend-change/continuation interpretation | RECOMMENDED | HIGH | REVIEW_REQUIRED |
 
 ## 3. Source locator baseline
@@ -47,7 +49,7 @@ External baseline: `02_野田式判断ルール台帳.md` β0.3-A限定運用版
 | R16 | C01 | C01 p.20 `意識の復活（大）`. |
 | R17 | C01, C03 | C01 p.21 `中間トレンドライン`; C03 p.13 `カウンターTL`. |
 | R18 | S05 | S05 `08 ラインをブレイクした時の対処法.txt`: post-break next high/low, redraw, and Field remapping sections. |
-| R19 | S03, S06 | S06 `10 ラインの引き方例.txt`: `ラインのブレイク後は【リターンムーブ】が発生しやすい` section. S03 provides support/resistance and line-break context. |
+| R19 | S03, S06 | S06 `10 ラインの引き方例.txt`: `ラインのブレイク後は【リターンムーブ】が発生しやすい` section. S03 provides support/resistance and line-break context. User review restricts R19 to observation/cue responsibility. |
 | R20 | S06 | S06 `10 ラインの引き方例.txt`: `トレンド転換` vs `トレンド続伸（加速）` section. |
 
 ## 4. Rule-by-rule draft
@@ -134,69 +136,76 @@ C03 directly states that after reaching a large-Dow edge, the last push-low / re
 
 ### R14 | 小ダウBR
 
-**Current baseline text**
-- TL：最終局面内でトレンド方向に引いた小ダウTL
-- HL：最終局面内の最後の押し安値・戻し高値
-- 大ダウの際へ到達後、ブレイクとリターンを確認して先行期を狙う
+**Confirmed formal definition**
+大ダウの際へ到達した後、最終局面内の小ダウラインを用いてBreakとReturnを確認し、次の先行期へ切り替わるActionを捉える。
 
-**Source-grounded draft interpretation**
-C01 p.18 explicitly defines small-Dow BR line types in the final phase and links them to targeting the early phase after reaching the large-Dow edge. S07 reinforces the break-return sequence for a final-phase small-Dow TL.
+対象ライン:
+- `TL`: 最終局面内で現在のトレンド方向に引いた小ダウTL。
+- `HL`: 最終局面内の最後の押し安値・戻し高値に置いた小ダウHL。
 
-**Primary Stage proposal**: `Trigger`
+構造順序は、`大ダウの際 -> 最終局面 -> 小ダウTL/HL -> Break -> Return -> 次の先行期候補`。
+
+**Responsibility boundary**
+R14はTrigger構造を扱う。Entry価格、注文、SL、TP、Lot、Position Size、発注は扱わない。
+
+**Primary Stage**: `Trigger`
 
 **Secondary**: `Phase / Setup`
 
-**Image review**: `REQUIRED`.
+**Source**: C01 p.18 / S07.
 
-**Open issues**
-- exact break definition;
-- exact return definition;
-- distinction between TL BR and HL BR in automation;
-- do not create candle-close/pips thresholds without source.
+**Detector status**: `SMALL_DOW_BR_DETECTION_TBD`.
 
-**User judgment**: `未確認`
+**Detector must not invent**: pips threshold, candle-close requirement, wick rule, Return tolerance, candle count, elapsed-time condition.
+
+**Status**: `CONFIRMED_RULE / DETECTION_TBD`
+
+**User judgment**: `OK`
 
 ### R15 | 意識の復活（小）
 
-**Current baseline text**
-本格局面または最終局面内で、反対トレンド方向へ引いた小ダウラインが一度抜けた後、再びラインへ戻るアクション。直前の小ダウターンの意識が復活した候補として扱う。
+**Confirmed formal definition**
+本格局面または最終局面内で、反対トレンド方向へ引いた小ダウラインが一度Breakされた後、再びそのライン側へ戻るActionを、直前の小ダウターンの意識が復活する候補として捉える。
 
-**Source-grounded draft interpretation**
-C01 p.19 directly describes a small-Dow line drawn opposite the trend direction in the main/final phase, a break, then a return to the line, interpreted as revival of the immediately preceding turn awareness and used to target the early phase.
+R15の本質は単なるReturn現象ではなく、`直前の小ダウターンの意識が再び働く構造的Action`。
 
-**Primary Stage proposal**: `Trigger`
+**R19 separation**
+R15とR19は別Rule。R15は`小ダウ構造 + 局面 + ライン方向 + 意識復活という構造的意味`を持つ。R19はTL Break後に価格が旧TL側へ戻る観測現象。`R15 = R19` とせず、`R15 is a subtype of R19` とも固定しない。
+
+**Primary Stage**: `Trigger`
 
 **Secondary**: `Phase`
 
-**Image review**: `REQUIRED`.
+**Source**: C01 p.19.
 
-**Open issues**
-- exact break/return detector;
-- exact relationship to R03 Turn and R19 Return Move;
-- whether `候補` wording should remain explicit.
+**Detector status**: `SMALL_AWARENESS_REVIVAL_DETECTION_TBD`.
 
-**User judgment**: `未確認`
+**Detector must not invent**: recross requirement, touch-only rule, zone-entry rule, pips tolerance, candle count, reaction-count threshold.
+
+**Status**: `CONFIRMED_RULE / DETECTION_TBD`
+
+**User judgment**: `OK`
 
 ### R16 | 意識の復活（大）
 
-**Current baseline text**
-一度抜けた大ダウラインへ戻り、メイントレンドへ復帰する候補。小ダウの上げ・下げを一巡した後、次サイクルの起点を探す。
+**Confirmed formal definition**
+一度Breakされた大ダウラインに対し、再びメイントレンド方向へ戻るActionを「意識の復活（大）」の候補として捉える。小ダウの上げ・下げが一巡した後に、次の小ダウサイクルの起点となる動きを見る。
 
-**Source-grounded draft interpretation**
-C01 p.20 directly describes returning to a once-broken large-Dow line, targeting a return to the main trend, after one small-Dow up/down cycle and while looking for the next-cycle origin.
+R16の本質は`大ダウ側のメイントレンド意識の復活`。
 
-**Primary Stage proposal**: `Trigger`
+`大ダウラインへタッチした = 意識の復活（大）` とはしない。`大ダウラインへ戻った = 即Entry` ともしない。
+
+**Primary Stage**: `Trigger`
 
 **Secondary**: `Phase / Environment`
 
-**Image review**: `REQUIRED`.
+**Source**: C01 p.20.
 
-**Open issues**
-- exact definition of one completed small-Dow cycle;
-- exact line-return detector;
-- relationship to R03 Turn and R19 Return Move.
+**Detector status**: `SMALL_DOW_CYCLE_DETECTION_TBD` plus line-return detection TBD.
 
-**User judgment**: `未確認`
+**Status**: `CONFIRMED_RULE / DETECTION_TBD`
+
+**User judgment**: `OK`
 
 ### R17 | 中間TL・カウンターTL
 
@@ -244,26 +253,34 @@ S05 directly prioritizes remapping after a line break: find the next high/low, d
 
 ### R19 | リターンムーブ
 
-**Current baseline text**
-- 上昇TLを下抜けた後：戻りで旧上昇TLへ接触する場面に売り圧力が出る候補
-- 下降TLを上抜けた後：戻りで旧下降TLへ接触する場面に買い圧力が出る候補
-- 発生しやすい傾向であり、必ず起きるとは扱わない
+**Confirmed formal definition**
+Return Moveとは、トレンドラインをBreakした後、価格が旧トレンドライン側へ戻る動きとして観測される現象をいう。発生しやすい傾向として認識するが、Return Moveそれ自体を売買方向、Entry、小ダウBR成立、意識の復活成立、トレンド転換/継続確定等の判断根拠にはしない。
 
-**Source-grounded draft interpretation**
-S06 explicitly states return moves are likely after line breaks: after breaking an up TL downward, price often rises back toward the former TL and new selling can appear; the reverse applies to a broken down TL.
+**Responsibility**
+R19は`判断材料`ではなく`観測現象`。Primary Stageは`Observation`。
 
-**Primary Stage proposal**: `Trigger`
+Return Moveが観測された場合、その後にR14小ダウBR、R15意識の復活（小）、その他の小ダウActionが形成されないかを見るための`OBSERVATION_CUE / SEARCH_CUE`として利用できる。これは`SIGNAL / TRIGGER / CONFIRMATION`ではない。
 
-**Secondary**: `Setup`
+**No effect on TL / mapping**
+R19単独でTL選択、引き直し、延長、削除、Zone変更、Field変更、Phase変更を行わない。ラインBreak後の高安確認、TL/CH更新、Field再定義はR18の責務であり、`R19 -> TL update`依存を作らない。
 
-**Image review**: `RECOMMENDED`.
+**Relation to R14/R15**
+- R14内のReturnは小ダウBR Trigger構造の一部であり、R19の一般観測現象と自動同一視しない。
+- R19が先に観測されてもR14/R15成立を意味しない。`R19 observed -> small-Dow structure watch -> R14/R15 independent check ->成立/不成立`。
 
-**Open issues**
-- exact contact/return tolerance;
-- whether return must touch the exact line or zone;
-- do not invent pips/candle thresholds.
+**Primary Stage**: `Observation`
 
-**User judgment**: `未確認`
+**Secondary**: `Downstream search context only`
+
+**Source**: S06 / S03. Source describes tendency and possible market-participant behavior; user review constrains R19 responsibility to observation/cue and does not promote it to a trade signal.
+
+**Detector status**: `RETURN_MOVE_DETECTION_TBD`.
+
+**Detector must not invent**: exact-line touch, zone-entry threshold, pips tolerance, wick/body rule, candle count, elapsed time.
+
+**Status**: `CONFIRMED_RULE / RETURN_DETECTION_TBD`
+
+**User judgment**: `OK / 単なる現象として扱う`
 
 ### R20 | TL BRとCH BRの意味
 
@@ -288,26 +305,25 @@ S06 directly contrasts TL break as weakening the prior trend and making the oppo
 
 **User judgment**: `未確認`
 
-## 5. Review order
+## 5. Review order after NS2-B1
 
-Recommended user-review batches:
-
+Still unresolved:
 1. `R11-R13` — Phase definitions and transition criteria.
-2. `R14-R16` — BR and awareness-revival triggers.
-3. `R17-R20` — intermediate/counter lines, remapping, return move, TL/CH BR meaning.
+2. `R17-R18 / R20` — intermediate/counter lines, remapping, TL/CH BR meaning.
 
-R11-R13 should be reviewed first because R14-R20 depend on Phase / edge context.
+R19 is already confirmed separately as an Observation/Cue and must not be reabsorbed into Trigger logic without a new user-approved change.
 
-## 6. Prohibitions for NS2-B draft
+## 6. Prohibitions after NS2-B1
 
-This draft does not:
-- confirm any R11-R20 rule;
+This document does not:
 - alter R01-R10 semantics;
+- confirm R11-R13, R17-R18, or R20;
+- process R21+ or start NS2-C;
 - create detector thresholds;
 - fix D1/H4/H1/M15 mappings;
 - create generic-TA replacements;
 - add Entry/SL/TP/sizing/execution logic;
 - create new Observation IDs;
 - promote NS1 Observations to FIXED;
-- modify TC or `trade-plan-a`;
-- process R21+.
+- treat R19 as Trigger, signal, confirmation, trade-direction evidence, confidence score, or TL-update condition;
+- modify TC or `trade-plan-a`.

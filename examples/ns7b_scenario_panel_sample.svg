@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="760" viewBox="0 0 1440 760">
+  <rect width="1440" height="760" fill="#fff"/>
+  <style>text{font-family:Arial,sans-serif;fill:#111}.t{font-size:28px;font-weight:700}.s{font-size:18px}.b{fill:#fafafa;stroke:#bbb;stroke-width:2}</style>
+  <text x="40" y="48" class="t">NODA Scenario A / B / C — static mock</text>
+  <g transform="translate(35 105)">
+    <rect width="443" height="590" rx="16" class="b"/><text x="20" y="40" class="t">A · Main continuation</text><text x="20" y="72" class="s">MAIN | UP | WAITING</text>
+    <line x1="20" y1="90" x2="423" y2="90" stroke="#1565c0" stroke-width="5"/>
+    <text x="20" y="130" class="s">Premise: main-phase structure intact</text><text x="20" y="165" class="s">Activate: supplied continuation Trigger</text><text x="20" y="200" class="s">Invalidate: supplied structure invalidation</text><text x="20" y="235" class="s">Next: downstream resolver after Trigger</text>
+    <polyline points="60,500 210,450 360,385" fill="none" stroke="#1565c0" stroke-width="5"/><text x="60" y="540" class="s">supplied path only</text>
+  </g>
+  <g transform="translate(498 105)">
+    <rect width="443" height="590" rx="16" class="b"/><text x="20" y="40" class="t">B · Alternative reversal</text><text x="20" y="72" class="s">ALTERNATIVE | DOWN | WAITING</text>
+    <line x1="20" y1="90" x2="423" y2="90" stroke="#c62828" stroke-width="5" stroke-dasharray="12 8"/>
+    <text x="20" y="130" class="s">Premise: reversal setup becomes relevant</text><text x="20" y="165" class="s">Activate: supplied reversal Trigger</text><text x="20" y="200" class="s">Invalidate: supplied reversal invalidation</text><text x="20" y="235" class="s">Next: re-evaluate only after evidence</text>
+    <polyline points="60,430 210,475 350,535" fill="none" stroke="#c62828" stroke-width="5" stroke-dasharray="12 8"/><text x="60" y="570" class="s">supplied path only</text>
+  </g>
+  <g transform="translate(961 105)">
+    <rect width="443" height="590" rx="16" class="b"/><text x="20" y="40" class="t">C · Wait / no-trade</text><text x="20" y="72" class="s">WAIT | WAIT | ACTIVE</text>
+    <line x1="20" y1="90" x2="423" y2="90" stroke="#616161" stroke-width="5" stroke-dasharray="4 8"/>
+    <text x="20" y="130" class="s">Premise: missing evidence is not fabricated</text><text x="20" y="165" class="s">Activate: A/B unresolved or insufficient</text><text x="20" y="200" class="s">Invalidate: A or B becomes active</text><text x="20" y="235" class="s">Next: wait for more structure</text>
+    <polyline points="60,475 210,475 350,475" fill="none" stroke="#616161" stroke-width="5" stroke-dasharray="4 8"/><text x="60" y="520" class="s">WAIT is kept as WAIT</text>
+  </g>
+</svg>

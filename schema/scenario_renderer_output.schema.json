@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/noda/scenario_renderer_output.schema.json",
+  "title": "NODA Scenario Renderer Output",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["render_request_id", "status", "artifacts", "unresolved"],
+  "properties": {
+    "render_request_id": {"type": "string"},
+    "status": {"enum": ["RENDERED", "PARTIAL", "BLOCKED"]},
+    "artifacts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["artifact_type", "format", "path"],
+        "properties": {
+          "artifact_type": {"enum": ["scenario_panel_image", "scenario_overlay_image"]},
+          "format": {"enum": ["SVG"]},
+          "path": {"type": "string"},
+          "chart_id": {"type": ["string", "null"]},
+          "notes": {"type": "string"}
+        }
+      }
+    },
+    "unresolved": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["code", "description"],
+        "properties": {
+          "code": {"type": "string"},
+          "description": {"type": "string"}
+        }
+      }
+    }
+  }
+}

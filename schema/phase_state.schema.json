@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/noda/phase_state.schema.json",
+  "title": "NODA PhaseState",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["stage", "resolution", "phase", "phase_candidate", "direction", "evidence", "higher_scale_recheck_required", "unresolved"],
+  "properties": {
+    "stage": {"const": "PHASE"},
+    "resolution": {"enum": ["KNOWN", "UNKNOWN", "NOT_EVALUATED"]},
+    "phase": {"enum": ["EARLY", "MAIN", "FINAL", "UNKNOWN"]},
+    "phase_candidate": {"enum": ["EARLY", "MAIN", "FINAL", "NONE", "UNKNOWN"]},
+    "direction": {"enum": ["UP", "DOWN", "UNDETERMINED", "UNKNOWN"]},
+    "environment_ref": {"type": ["string", "null"]},
+    "field_scale_ref": {"type": ["string", "null"]},
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["method", "state", "evidence_refs"],
+        "properties": {
+          "method": {"enum": ["R11_PHASE_CONTEXT", "R12_EARLY_STRUCTURE", "R13_PRICE_STRUCTURE", "R13_MA_DIRECTION", "R13_FIB_FIELD_SCALE", "OTHER_SOURCE_DEFINED"]},
+          "state": {"enum": ["SUPPORTS", "DOES_NOT_SUPPORT", "UNKNOWN", "NOT_EVALUATED"]},
+          "evidence_refs": {"type": "array", "items": {"type": "string"}},
+          "notes": {"type": "string"}
+        }
+      }
+    },
+    "ma_direction": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["resolution", "middle_group", "long_ma", "agreement"],
+      "properties": {
+        "resolution": {"enum": ["KNOWN", "UNKNOWN", "NOT_EVALUATED"]},
+        "middle_group": {"enum": ["UP", "DOWN", "MIXED", "UNKNOWN", "NOT_EVALUATED"]},
+        "long_ma": {"enum": ["UP", "DOWN", "OTHER", "UNKNOWN", "NOT_EVALUATED"]},
+        "agreement": {"enum": ["UP", "DOWN", "NO_AGREEMENT", "UNKNOWN", "NOT_EVALUATED"]},
+        "evidence_refs": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "fib_field_scale": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["resolution", "reference_scale", "observed_level_class", "evidence_refs"],
+      "properties": {
+        "resolution": {"enum": ["KNOWN", "UNKNOWN", "NOT_EVALUATED"]},
+        "reference_scale": {"enum": ["SMALL_DOW_N_WAVE", "LARGE_DOW_N_WAVE", "OTHER_SOURCE_DEFINED", "UNKNOWN", "NOT_EVALUATED"]},
+        "observed_level_class": {"enum": ["AROUND_100_TO_161_8", "AROUND_200", "AROUND_261_8", "OTHER_SOURCE_SHOWN", "UNKNOWN", "NOT_EVALUATED"]},
+        "evidence_refs": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "higher_scale_recheck_required": {"enum": ["TRUE", "FALSE", "UNKNOWN", "NOT_EVALUATED"]},
+    "evidence_refs": {"type": "array", "items": {"type": "string"}},
+    "unresolved": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["code", "description"],
+        "properties": {
+          "code": {"type": "string"},
+          "description": {"type": "string"},
+          "rule_ref": {"type": ["string", "null"]},
+          "affected_fields": {"type": "array", "items": {"type": "string"}}
+        }
+      }
+    }
+  }
+}

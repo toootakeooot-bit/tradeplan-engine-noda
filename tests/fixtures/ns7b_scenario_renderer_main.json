@@ -1,0 +1,76 @@
+{
+  "render_request_id": "NS7B-MOCK-001",
+  "source_chart_images": [
+    {"chart_id": "chart-H1", "uri": "chart-placeholder.png", "timeframe": "H1", "label": "Mock chart reference"}
+  ],
+  "environment_state_ref": "env:mock-001",
+  "phase_state_ref": "phase:mock-001",
+  "setup_state_ref": "setup:mock-001",
+  "trigger_state_ref": "trigger:mock-001",
+  "scenarios": [
+    {
+      "scenario_id": "A",
+      "scenario_label": "Main continuation",
+      "scenario_type": "MAIN",
+      "premise": "Main-phase structure remains intact.",
+      "direction": "UP",
+      "activation_conditions": ["Continuation-side trigger becomes resolved TRUE"],
+      "invalidation_conditions": ["Current structural premise is invalidated"],
+      "next_action": "Forward to downstream trade-plan resolver only after trigger is resolved.",
+      "evidence_refs": ["R13", "R29", "TriggerState"],
+      "priority": 1,
+      "confidence": "MEDIUM",
+      "current_status": "WAITING"
+    },
+    {
+      "scenario_id": "B",
+      "scenario_label": "Alternative reversal",
+      "scenario_type": "ALTERNATIVE",
+      "premise": "Reversal setup becomes relevant if the current structure weakens.",
+      "direction": "DOWN",
+      "activation_conditions": ["Reversal setup and source-defined trigger are both present"],
+      "invalidation_conditions": ["Reversal setup is invalidated"],
+      "next_action": "Re-evaluate downstream plan only when activation evidence is supplied.",
+      "evidence_refs": ["R28", "TriggerState"],
+      "priority": 2,
+      "confidence": "LOW",
+      "current_status": "WAITING"
+    },
+    {
+      "scenario_id": "C",
+      "scenario_label": "Wait / no-trade",
+      "scenario_type": "WAIT",
+      "premise": "No scenario is allowed to fabricate missing trigger evidence.",
+      "direction": "WAIT",
+      "activation_conditions": ["A and B remain unresolved or evidence is insufficient"],
+      "invalidation_conditions": ["A or B becomes evaluable and active"],
+      "next_action": "Wait for more structure/evidence.",
+      "evidence_refs": ["UNKNOWN-preservation"],
+      "priority": 3,
+      "confidence": "NOT_EVALUATED",
+      "current_status": "ACTIVE"
+    }
+  ],
+  "visual_annotations": {
+    "markers": [
+      {"marker_id": "m-current", "role": "CURRENT", "x": 0.48, "y": 0.55, "label": "NOW"},
+      {"marker_id": "m-a-act", "role": "ACTIVATION", "scenario_id": "A", "x": 0.64, "y": 0.42, "label": "A activate"},
+      {"marker_id": "m-b-invalid", "role": "INVALIDATION", "scenario_id": "B", "x": 0.42, "y": 0.67, "label": "B invalid"}
+    ],
+    "lines": [
+      {"line_id": "l-ch", "role": "CH", "x1": 0.10, "y1": 0.28, "x2": 0.90, "y2": 0.28, "label": "supplied CH"},
+      {"line_id": "l-edge", "role": "EDGE", "x1": 0.10, "y1": 0.72, "x2": 0.90, "y2": 0.72, "label": "supplied edge"}
+    ],
+    "zones": [
+      {"zone_id": "z-wait", "role": "WAIT_AREA", "x": 0.35, "y": 0.44, "width": 0.25, "height": 0.18, "label": "wait area"}
+    ],
+    "paths": [
+      {"path_id": "p-a", "scenario_id": "A", "points": [{"x": 0.48, "y": 0.55}, {"x": 0.64, "y": 0.42}, {"x": 0.78, "y": 0.30}], "label": "A"},
+      {"path_id": "p-b", "scenario_id": "B", "points": [{"x": 0.48, "y": 0.55}, {"x": 0.43, "y": 0.62}, {"x": 0.33, "y": 0.76}], "label": "B"},
+      {"path_id": "p-c", "scenario_id": "C", "points": [{"x": 0.48, "y": 0.55}, {"x": 0.54, "y": 0.55}, {"x": 0.60, "y": 0.55}], "label": "C"}
+    ]
+  },
+  "unresolved": [
+    {"code": "MOCK_GEOMETRY", "description": "Coordinates are static mock data, not chart-derived evidence.", "scenario_id": "C"}
+  ]
+}

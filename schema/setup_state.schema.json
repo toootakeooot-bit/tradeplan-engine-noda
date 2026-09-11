@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/noda/setup_state.schema.json",
+  "title": "NODA SetupState",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["stage", "setup_status", "setup_type", "formation", "relevant_lines", "relevant_fields", "wait_for_trigger", "evidence_refs", "unresolved"],
+  "properties": {
+    "stage": {"const": "SETUP"},
+    "environment_ref": {"type": ["string", "null"]},
+    "phase_ref": {"type": ["string", "null"]},
+    "setup_status": {"enum": ["PRESENT", "ABSENT", "UNKNOWN", "NOT_EVALUATED"]},
+    "setup_type": {"enum": ["REVERSAL_FORMATION", "CONTINUATION_FORMATION", "SMALL_DOW_LINE_CONTEXT", "SOURCE_DEFINED_OTHER", "NONE", "UNKNOWN"]},
+    "direction_candidate": {"enum": ["UP", "DOWN", "UNDETERMINED", "UNKNOWN"]},
+    "formation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["resolution", "formation_type", "formation_pattern", "evidence_refs"],
+      "properties": {
+        "resolution": {"enum": ["KNOWN", "UNKNOWN", "NOT_EVALUATED"]},
+        "formation_type": {"enum": ["REVERSAL", "CONTINUATION", "NONE", "UNKNOWN"]},
+        "formation_pattern": {
+          "enum": [
+            "DOUBLE_TOP",
+            "DOUBLE_BOTTOM",
+            "TRIPLE_TOP",
+            "TRIPLE_BOTTOM",
+            "HEAD_AND_SHOULDERS",
+            "RECTANGLE",
+            "TRIANGLE",
+            "FLAG",
+            "WEDGE",
+            "NONE",
+            "UNKNOWN"
+          ]
+        },
+        "evidence_refs": {"type": "array", "items": {"type": "string"}},
+        "notes": {"type": "string"}
+      }
+    },
+    "relevant_lines": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["line_ref", "role"],
+        "properties": {
+          "line_ref": {"type": "string"},
+          "role": {"enum": ["SMALL_DOW_LINE", "INTERMEDIATE_TL", "MIDDLE_DOW_COUNTER_TL", "NECKLINE", "SUPPORT_RESISTANCE_CONTEXT", "OTHER_SOURCE_DEFINED"]},
+          "evidence_refs": {"type": "array", "items": {"type": "string"}}
+        }
+      }
+    },
+    "relevant_fields": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "components": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["component_type", "state", "evidence_refs"],
+        "properties": {
+          "component_type": {"enum": ["PHASE_CONTEXT", "EDGE_CONTEXT", "SMALL_DOW_LINE_CONTEXT", "FORMATION_RECOGNITION", "FIELD_CONTEXT", "OTHER_SOURCE_DEFINED"]},
+          "state": {"enum": ["SUPPORTS", "DOES_NOT_SUPPORT", "UNKNOWN", "NOT_EVALUATED"]},
+          "evidence_refs": {"type": "array", "items": {"type": "string"}},
+          "notes": {"type": "string"}
+        }
+      }
+    },
+    "wait_for_trigger": {"enum": ["TRUE", "FALSE", "UNKNOWN", "NOT_EVALUATED"]},
+    "evidence_refs": {"type": "array", "items": {"type": "string"}},
+    "unresolved": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["code", "description"],
+        "properties": {
+          "code": {"type": "string"},
+          "description": {"type": "string"},
+          "rule_ref": {"type": ["string", "null"]},
+          "affected_fields": {"type": "array", "items": {"type": "string"}}
+        }
+      }
+    }
+  }
+}

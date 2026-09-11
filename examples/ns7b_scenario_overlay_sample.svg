@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="900" viewBox="0 0 1440 900">
+  <rect width="1440" height="900" fill="#fff"/>
+  <style>text{font-family:Arial,sans-serif;fill:#111}.t{font-size:28px;font-weight:700}.s{font-size:18px}</style>
+  <text x="40" y="48" class="t">NODA Scenario Overlay — static mock</text>
+  <rect x="40" y="80" width="1360" height="760" fill="#f3f3f3" stroke="#333" stroke-width="2"/>
+  <g stroke="#ddd" stroke-width="1">
+    <line x1="40" y1="230" x2="1400" y2="230"/><line x1="40" y1="380" x2="1400" y2="380"/><line x1="40" y1="530" x2="1400" y2="530"/><line x1="40" y1="680" x2="1400" y2="680"/>
+    <line x1="300" y1="80" x2="300" y2="840"/><line x1="560" y1="80" x2="560" y2="840"/><line x1="820" y1="80" x2="820" y2="840"/><line x1="1080" y1="80" x2="1080" y2="840"/>
+  </g>
+  <line x1="176" y1="293" x2="1264" y2="293" stroke="#222" stroke-width="3" stroke-dasharray="8 6"/><text x="1270" y="286" class="s">supplied CH</text>
+  <line x1="176" y1="627" x2="1264" y2="627" stroke="#222" stroke-width="3" stroke-dasharray="8 6"/><text x="1270" y="620" class="s">supplied edge</text>
+  <rect x="516" y="414" width="340" height="137" fill="#777" fill-opacity="0.12" stroke="#555" stroke-dasharray="6 6"/><text x="525" y="438" class="s">supplied wait area</text>
+  <circle cx="693" cy="498" r="9" fill="#fff" stroke="#616161" stroke-width="5"/><text x="707" y="482" class="s">NOW</text>
+  <polyline points="693,498 910,399 1101,308" fill="none" stroke="#1565c0" stroke-width="6"/><text x="1112" y="300" class="t">A</text>
+  <polyline points="693,498 625,551 489,658" fill="none" stroke="#c62828" stroke-width="6" stroke-dasharray="12 8"/><text x="470" y="682" class="t">B</text>
+  <polyline points="693,498 775,498 856,498" fill="none" stroke="#616161" stroke-width="6" stroke-dasharray="4 8"/><text x="867" y="490" class="t">C</text>
+  <circle cx="910" cy="399" r="9" fill="#fff" stroke="#1565c0" stroke-width="5"/><text x="925" y="386" class="s">A activate</text>
+  <g stroke="#c62828" stroke-width="5"><line x1="601" y1="579" x2="621" y2="599"/><line x1="621" y1="579" x2="601" y2="599"/></g><text x="626" y="580" class="s">B invalid</text>
+  <text x="40" y="875" class="s">Mock geometry only — NS7-B does not infer chart coordinates.</text>
+</svg>

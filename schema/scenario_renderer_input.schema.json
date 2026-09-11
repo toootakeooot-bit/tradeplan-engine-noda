@@ -1,0 +1,149 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/noda/scenario_renderer_input.schema.json",
+  "title": "NODA Scenario Renderer Input",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["render_request_id", "source_chart_images", "environment_state_ref", "phase_state_ref", "setup_state_ref", "trigger_state_ref", "scenarios"],
+  "properties": {
+    "render_request_id": {"type": "string", "minLength": 1},
+    "source_chart_images": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["chart_id", "uri"],
+        "properties": {
+          "chart_id": {"type": "string", "minLength": 1},
+          "uri": {"type": "string", "minLength": 1},
+          "timeframe": {"type": ["string", "null"]},
+          "label": {"type": ["string", "null"]}
+        }
+      }
+    },
+    "environment_state_ref": {"type": "string", "minLength": 1},
+    "phase_state_ref": {"type": "string", "minLength": 1},
+    "setup_state_ref": {"type": "string", "minLength": 1},
+    "trigger_state_ref": {"type": "string", "minLength": 1},
+    "scenarios": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["scenario_id", "scenario_label", "scenario_type", "premise", "direction", "activation_conditions", "invalidation_conditions", "next_action", "evidence_refs", "priority", "confidence", "current_status"],
+        "properties": {
+          "scenario_id": {"enum": ["A", "B", "C"]},
+          "scenario_label": {"type": "string"},
+          "scenario_type": {"enum": ["MAIN", "ALTERNATIVE", "WAIT"]},
+          "premise": {"type": "string"},
+          "direction": {"enum": ["UP", "DOWN", "NEUTRAL", "WAIT", "UNKNOWN"]},
+          "activation_conditions": {"type": "array", "items": {"type": "string"}},
+          "invalidation_conditions": {"type": "array", "items": {"type": "string"}},
+          "next_action": {"type": "string"},
+          "evidence_refs": {"type": "array", "items": {"type": "string"}},
+          "priority": {"type": "integer", "minimum": 1, "maximum": 3},
+          "confidence": {"enum": ["HIGH", "MEDIUM", "LOW", "UNKNOWN", "NOT_EVALUATED"]},
+          "current_status": {"enum": ["ACTIVE", "WAITING", "INVALID", "UNKNOWN", "INSUFFICIENT_EVIDENCE", "NOT_EVALUATED"]}
+        }
+      }
+    },
+    "visual_annotations": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "markers": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["marker_id", "role", "x", "y"],
+            "properties": {
+              "marker_id": {"type": "string"},
+              "role": {"enum": ["CURRENT", "ACTIVATION", "INVALIDATION", "REFERENCE"]},
+              "scenario_id": {"enum": ["A", "B", "C"]},
+              "x": {"type": "number", "minimum": 0, "maximum": 1},
+              "y": {"type": "number", "minimum": 0, "maximum": 1},
+              "label": {"type": "string"}
+            }
+          }
+        },
+        "lines": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["line_id", "role", "x1", "y1", "x2", "y2"],
+            "properties": {
+              "line_id": {"type": "string"},
+              "role": {"enum": ["HL", "TL", "CH", "EDGE", "FIELD_BOUNDARY", "REFERENCE"]},
+              "x1": {"type": "number", "minimum": 0, "maximum": 1},
+              "y1": {"type": "number", "minimum": 0, "maximum": 1},
+              "x2": {"type": "number", "minimum": 0, "maximum": 1},
+              "y2": {"type": "number", "minimum": 0, "maximum": 1},
+              "label": {"type": "string"}
+            }
+          }
+        },
+        "zones": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["zone_id", "role", "x", "y", "width", "height"],
+            "properties": {
+              "zone_id": {"type": "string"},
+              "role": {"enum": ["ZONE", "FIELD", "WAIT_AREA", "REFERENCE"]},
+              "x": {"type": "number", "minimum": 0, "maximum": 1},
+              "y": {"type": "number", "minimum": 0, "maximum": 1},
+              "width": {"type": "number", "minimum": 0, "maximum": 1},
+              "height": {"type": "number", "minimum": 0, "maximum": 1},
+              "label": {"type": "string"}
+            }
+          }
+        },
+        "paths": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["path_id", "scenario_id", "points"],
+            "properties": {
+              "path_id": {"type": "string"},
+              "scenario_id": {"enum": ["A", "B", "C"]},
+              "points": {
+                "type": "array",
+                "minItems": 2,
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": ["x", "y"],
+                  "properties": {
+                    "x": {"type": "number", "minimum": 0, "maximum": 1},
+                    "y": {"type": "number", "minimum": 0, "maximum": 1}
+                  }
+                }
+              },
+              "label": {"type": "string"}
+            }
+          }
+        }
+      }
+    },
+    "unresolved": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["code", "description"],
+        "properties": {
+          "code": {"type": "string"},
+          "description": {"type": "string"},
+          "scenario_id": {"enum": ["A", "B", "C"]}
+        }
+      }
+    }
+  }
+}
